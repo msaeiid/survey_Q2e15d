@@ -1,0 +1,341 @@
+{% extends 'Base.html' %}
+{% block title %}
+    کلاس اجتماعی
+{% endblock %}
+{% block header %}
+    <div class="question">
+        <h5>
+            <span id="amORpm"></span>
+
+            بخير.
+            <br>
+            من
+            {{ answersheet.interviewer.name }}
+            ازشرکت تحقيقات بازار آگاه هستم. ما در حال انجام پژوهشي در مورد
+            {{ answersheet.survey.title }}
+            برای بهتر شدن سرویس دهی
+            {{ answersheet.survey.title }}
+            می باشیم. لطفا دقایقی از وقت خود را به ما اختصاص داده و در این نظرسنجی شرکت کنید
+        </h5>
+    </div>
+{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="question">
+            <h5>
+                {{ Q2.code }}
+                {{ Q2.title }}
+            </h5>
+            {{ Q2_form.age_year }}
+            <div class="valid-feedback valid-age">
+            </div>
+            <div class="invalid-feedback">
+                {{ Q2_form.errors.age_year.as_text }}
+            </div>
+        </div>
+        <div class="question">
+            <h5>
+                {{ Q3.code }}
+                {{ Q3.title }}
+            </h5>
+            {{ Q3_form.marital_status }}
+            <div class="valid-feedback valid-age">
+                معتبر
+            </div>
+            <div class="invalid-feedback">
+                {{ Q3_form.marital_status.errors.as_text }}
+            </div>
+        </div>
+        <div class="child hide question">
+            <h5>
+                {{ Q4.code }}
+                {{ Q4.title }}
+            </h5>
+            {{ Q4_form.numer_of_child }}
+            <div class="valid-feedback">
+                معتبر
+            </div>
+            <div class="invalid-feedback">
+                تعداد فرزندان نامعتبر است
+            </div>
+        </div>
+        <div class="Q4_1 hide question">
+            <h5>
+                {{ Q4_1.code }}
+                {{ Q4_1.title }}
+            </h5>
+            <div id="one_children" class="hide">
+                <h6>فرزند اول</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.first_child_year.label }}
+                    {{ Q4_1_form.first_child_year }}
+                    {{ Q4_1_form.first_child_gender.label }}
+                    {{ Q4_1_form.first_child_gender }}
+                    {{ Q4_1_form.first_child_age.label }}
+                    {{ Q4_1_form.first_child_age }}
+                </div>
+            </div>
+            <div id="two_children" class="hide">
+                <h6>فرزند اول</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.first_child_year.label }}
+                    {{ Q4_1_form.first_child_year }}
+                    {{ Q4_1_form.first_child_gender.label }}
+                    {{ Q4_1_form.first_child_gender }}
+                    {{ Q4_1_form.first_child_age.label }}
+                    {{ Q4_1_form.first_child_age }}
+                </div>
+                <hr>
+                <h6>فرزند دوم</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.second_child_year.label }}
+                    {{ Q4_1_form.second_child_year }}
+                    {{ Q4_1_form.second_child_gender.label }}
+                    {{ Q4_1_form.second_child_gender }}
+                    {{ Q4_1_form.second_child_age.label }}
+                    {{ Q4_1_form.second_child_age }}
+                </div>
+            </div>
+            <div id="three_children" class="hide">
+                <h6>فرزند اول</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.first_child_year.label }}
+                    {{ Q4_1_form.first_child_year }}
+                    {{ Q4_1_form.first_child_gender.label }}
+                    {{ Q4_1_form.first_child_gender }}
+                    {{ Q4_1_form.first_child_age.label }}
+                    {{ Q4_1_form.first_child_age }}
+                </div>
+                <hr>
+                <h6>فرزند دوم</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.second_child_year.label }}
+                    {{ Q4_1_form.second_child_year }}
+                    {{ Q4_1_form.second_child_gender.label }}
+                    {{ Q4_1_form.second_child_gender }}
+                    {{ Q4_1_form.second_child_age.label }}
+                    {{ Q4_1_form.second_child_age }}
+                </div>
+                <hr>
+                <h6>فرزند سوم</h6>
+                <br>
+                <div class="row">
+                    {{ Q4_1_form.third_child_year.label }}
+                    {{ Q4_1_form.third_child_year }}
+                    {{ Q4_1_form.third_child_gender.label }}
+                    {{ Q4_1_form.third_child_gender }}
+                    {{ Q4_1_form.third_child_age.label }}
+                    {{ Q4_1_form.third_child_age }}
+                </div>
+            </div>
+        </div>
+        <div class="question">
+            <h5>
+                {{ T1.code }}
+                {{ T1.title }}
+            </h5>
+            {{ T1_from.home }}
+        </div>
+        <div class="question">
+            <h5>
+                {{ T2.code }}
+                {{ T2.title }}
+            </h5>
+            {% for job in T2_form.job %}
+                <div class="form-check">
+                    {{ job }}
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+        <div class="question">
+            <h5>
+                {{ T3.code }}
+                {{ T3.title }}
+            </h5>
+            {{ T3_from.region }}
+        </div>
+        <input type="hidden" name="age">
+        <button type="submit" class="btn btn-primary btn-lg col-lg-4 col-md-4 col-sm-6 col-6">بعد</button>
+    </form>
+{% endblock %}
+{% block js %}
+    <script>
+        $('input[type=number]').addClass('form-control col-lg-12 col-md-12 col-sm-12 col-12')
+        $('select').addClass('form-control col-lg-12 col-md-12 col-sm-12 col-12')
+        $('.form-check label').addClass('form-check-label')
+        $('input[name=first_child_age]').prop('readonly', true)
+        $('input[name=second_child_age]').prop('readonly', true)
+        $('input[name=third_child_age]').prop('readonly', true)
+        $('select[name=marital_status]').change(function () {
+            if (this.value == 2 || this.value == 3 || this.value == 4) {
+                $('.child').removeClass('hide')
+                $('input[name=numer_of_child]').prop('required', true)
+            } else {
+                $('.child').addClass('hide')
+                $('.Q4_1').addClass('hide')
+                $('input[name=numer_of_child]').val('')
+                $('input[name=numer_of_child]').prop('required', false)
+                $('input[name=first_child_year]').val('')
+                $('input[name=second_child_year]').val('')
+                $('input[name=third_child_year]').val('')
+            }
+        });
+        $('input[name=numer_of_child]').keyup(function () {
+            $('input[name=first_child_year]').val('')
+            $('input[name=second_child_year]').val('')
+            $('input[name=third_child_year]').val('')
+            $('input[name=first_child_year]').prop('required', false)
+            $('input[name=second_child_year]').prop('required', false)
+            $('input[name=third_child_year]').prop('required', false)
+            $('select[name=first_child_gender]').prop('required', false)
+            $('select[name=second_child_gender]').prop('required', false)
+            $('select[name=third_child_gender]').prop('required', false)
+            if (parseInt(this.value) == 0) {
+                $('.Q4_1').addClass('hide')
+            } else if (parseInt(this.value) == 1) {
+                $('.Q4_1').removeClass('hide')
+                $('#one_children').removeClass('hide')
+                $('#two_children').addClass('hide')
+                $('#three_children').addClass('hide')
+                $('#one_children input[name=first_child_year]').prop('required', true)
+                $('#one_children select[name=first_child_gender]').prop('required', true)
+
+            } else if (parseInt(this.value) == 2) {
+                $('.Q4_1').removeClass('hide')
+                $('#one_children').addClass('hide')
+                $('#two_children').removeClass('hide')
+                $('#three_children').addClass('hide')
+                $('#two_children input[name=first_child_year]').prop('required', true)
+                $('#two_children input[name=second_child_year]').prop('required', true)
+                $('#two_children select[name=first_child_gender]').prop('required', true)
+                $('#two_children select[name=second_child_gender]').prop('required', true)
+
+            } else if (parseInt(this.value) >= 3) {
+                $('.Q4_1').removeClass('hide')
+                $('#one_children').addClass('hide')
+                $('#two_children').addClass('hide')
+                $('#three_children').removeClass('hide')
+                $('#three_children input[name=first_child_year]').prop('required', true)
+                $('#three_children input[name=second_child_year]').prop('required', true)
+                $('#three_children input[name=third_child_year]').prop('required', true)
+                $('#three_children select[name=first_child_gender]').prop('required', true)
+                $('#three_children select[name=second_child_gender]').prop('required', true)
+                $('#three_children select[name=third_child_gender]').prop('required', true)
+            }
+        })
+        $('input[name=age_year]').keyup(function () {
+            if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
+                $('input[name=age_year]').addClass('is-invalid')
+                $('input[name=age_year]').removeClass('is-valid')
+            } else if (this.value.length == 4) {
+                var m = moment();
+                m.locale('fa');
+                var age = parseInt(m.format('YYYY')) - parseInt(this.value)
+                $('.valid-age').text('معتبر')
+                $('input[type=hidden][name=age]').val(age)
+                $('input[name=age_year]').removeClass('is-invalid')
+                $('input[name=age_year]').addClass('is-valid')
+            }
+        });
+        $('input[name=numer_of_child]').keyup(function () {
+            if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
+                $('input[name=numer_of_child]').addClass('is-invalid')
+                $('input[name=numer_of_child]').removeClass('is-valid')
+            } else {
+                $('input[name=numer_of_child]').removeClass('is-invalid')
+                $('input[name=numer_of_child]').addClass('is-valid')
+            }
+        });
+        $('input[name=first_child_year]').keyup(function () {
+            if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
+                $('input[name=first_child_year]').addClass('is-invalid')
+                $('input[name=first_child_year]').removeClass('is-valid')
+                $('input[name=first_child_age]').val('سال تولد اشتباه است')
+            } else if (this.value.length == 4) {
+                var m = moment();
+                m.locale('fa');
+                var age = parseInt(m.format('YYYY')) - parseInt(this.value)
+                $('input[name=first_child_age]').val(age)
+                $('input[name=first_child_year]').removeClass('is-invalid')
+                $('input[name=first_child_year]').addClass('is-valid')
+            }
+        });
+        $('input[name=second_child_year]').keyup(function () {
+            if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
+                $('input[name=second_child_year]').addClass('is-invalid')
+                $('input[name=second_child_year]').removeClass('is-valid')
+                $('input[name=second_child_age]').val('سال تولد اشتباه است')
+            } else if (this.value.length == 4) {
+                var m = moment();
+                m.locale('fa');
+                var age = parseInt(m.format('YYYY')) - parseInt(this.value)
+                $('input[name=second_child_age]').val(age)
+                $('input[name=second_child_year]').removeClass('is-invalid')
+                $('input[name=second_child_year]').addClass('is-valid')
+            }
+        });
+        $('input[name=third_child_year]').keyup(function () {
+            if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
+                $('input[name=third_child_year]').addClass('is-invalid')
+                $('input[name=third_child_year]').removeClass('is-valid')
+                $('input[name=third_child_age]').val('سال تولد اشتباه است')
+            } else if (this.value.length == 4) {
+                var m = moment();
+                m.locale('fa');
+                var age = parseInt(m.format('YYYY')) - parseInt(this.value)
+                $('input[name=third_child_age]').val(age)
+                $('input[name=third_child_year]').removeClass('is-invalid')
+                $('input[name=third_child_year]').addClass('is-valid')
+            }
+        });
+        $('select[name=marital_status]').change(function () {
+            if (this.value == '') {
+                $('select[name=marital_status]').addClass('is-invalid')
+                $('select[name=marital_status]').removeClass('is-valid')
+            } else {
+                $('select[name=marital_status]').removeClass('is-invalid')
+                $('select[name=marital_status]').addClass('is-valid')
+            }
+        });
+        $('select[name=home]').change(function () {
+            if (this.value == '') {
+                $('select[name=home]').addClass('is-invalid')
+                $('select[name=home]').removeClass('is-valid')
+            } else {
+                $('select[name=home]').removeClass('is-invalid')
+                $('select[name=home]').addClass('is-valid')
+            }
+        });
+        $('select[name=region]').change(function () {
+            if (this.value == '') {
+                $('select[name=region]').addClass('is-invalid')
+                $('select[name=region]').removeClass('is-valid')
+            } else {
+                $('select[name=region]').removeClass('is-invalid')
+                $('select[name=region]').addClass('is-valid')
+            }
+        });
+        $(document).ready(function () {
+            var m = moment();
+            m.locale('fa');
+            var hour = parseInt(m.format('HH'))
+            let result
+            if (hour > 0 && hour < 12) {
+                result = 'صبح'
+            } else {
+                result = 'عصر'
+            }
+            $('#amORpm').text(result)
+        });
+    </script>
+{% endblock %}
+{% block exta_header %}
+    <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script>
+{% endblock %}

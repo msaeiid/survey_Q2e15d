@@ -1,0 +1,266 @@
+{% extends 'Base.html' %}
+{% load jalali_tags %}
+{% load static %}
+{% block title %}
+    {{ Q1.title }}
+{% endblock %}
+{% block content %}
+    <div class="question">
+        <form method="post">
+            {% csrf_token %}
+            <h5>{{ Q1.code }}
+                {{ Q1.title }}
+            </h5>
+            <div>
+                <label for="{{ responder_frm.firstname.id_for_label }}">{{ responder_frm.firstname.label }}</label>
+                {{ responder_frm.firstname }}
+                <div class="valid-feedback">
+                    معتبر
+                </div>
+                <div class="invalid-feedback">
+                    {{ responder_frm.errors.firstname.as_text }}
+                </div>
+            </div>
+            <div>
+                <label for="{{ responder_frm.lastname.id_for_label }}">{{ responder_frm.lastname.label }}</label>
+                {{ responder_frm.lastname }}
+                <div class="valid-feedback">
+                    معتبر
+                </div>
+                <div class="invalid-feedback">
+                    {{ responder_frm.errors.lastname.as_text }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="{{ responder_frm.city.id_for_label }}">{{ responder_frm.city.label }}</label><br>
+                {{ responder_frm.city }}
+                <div class="invalid-feedback">
+                    {{ responder_frm.errors.city.as_text }}
+                </div>
+            </div>
+            <div>
+                <label for="{{ responder_frm.mobile.id_for_label }}">{{ responder_frm.mobile.label }}</label>
+                {{ responder_frm.mobile }}
+                <div class="valid-feedback">
+                    معتبر
+                </div>
+                <div class="invalid-feedback">
+                    موبایل را کامل وارد کنید
+                </div>
+            </div>
+            <div>
+                <label for="{{ answersheet_frm.date.id_for_label }}">{{ answersheet_frm.date.label }}</label>
+                {{ answersheet_frm.date }}
+                <div class="valid-feedback" id="day">
+                </div>
+                <div class="invalid-feedback">
+                    {{ answersheet_frm.errors.date.as_text }}
+                </div>
+            </div>
+            <div>
+                <label for="{{ interviewer_frm.code.id_for_label }}">{{ interviewer_frm.code.label }}</label>
+                {{ interviewer_frm.code }}
+                <div class="valid-feedback interviewer">
+                    معتبر
+                </div>
+                <div class="invalid-feedback interviewer-error">
+                    {{ interviewer_frm.code.errors.as_text }}
+                </div>
+            </div>
+            <input type="hidden" name="day" value="">
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary col-lg-4 col-md-6 col-sm-8 col-8">بعد</button>
+        </form>
+    </div>
+
+
+
+    <!-- By default, Datepicker using jQuery, you need to set your script after loading jQuery! -->
+    <!-- loading directly -->
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+    <script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+    <!-- OR -->
+    <!-- loading by form (if used AdminJalaliDateWidget) -->
+    {{ form.media }}
+{% endblock %}
+{% block side %}
+{% endblock %}
+{% block js %}
+    <script type="application/javascript">
+        $('#id_city').addClass('custom-select col-lg-12 col-md-12 col-sm-12 col-12')
+        $('#id_city').attr('required')
+        $('input[type=text]').addClass('form-control col-lg-12 col-md-12 col-sm-12 col-12')
+        $('input[name=date]').change(function () {
+            if (this.value !== undefined) {
+                if (this.value.length == 10) {
+                    let temp = moment.from(this.value, 'fa', 'YYYY/M/D').format('YYYY-M-D')
+                    var date_ = new Date(temp.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"))
+                    let result
+                    switch (date_.getDay()) {
+                        case 0:
+                            result = 'یکشنبه';
+                            break;
+                        case 1:
+                            result = 'دوشنبه';
+                            break;
+                        case 2:
+                            result = 'سه شنبه';
+                            break;
+                        case 3:
+                            result = 'چهارشنبه';
+                            break;
+                        case 4:
+                            result = 'پنجشنبه';
+                            break;
+                        case 5:
+                            result = 'جمعه';
+                            break;
+                        case 6:
+                            result = 'شنبه';
+                            break;
+                    }
+                    $('input[name=date]').removeClass('is-invalid')
+                    $('input[name=date]').addClass('is-valid')
+                    $('#day').text(result)
+                    $('input[name=day]').val(result)
+                } else {
+                    $('input[name=date]').addClass('is-invalid')
+                    $('input[name=date]').removeClass('is-valid')
+                }
+            }
+        });
+        $('#id_firstname').keyup(function () {
+            if (this.value.length >= 1) {
+                $('#id_firstname').removeClass('is-invalid')
+                $('#id_firstname').addClass('is-valid')
+            } else {
+                $('#id_firstname').addClass('is-invalid')
+                $('#id_firstname').removeClass('is-valid')
+            }
+        });
+        $('#id_lastname').keyup(function () {
+            if (this.value.length >= 1) {
+                $('#id_lastname').removeClass('is-invalid')
+                $('#id_lastname').addClass('is-valid')
+            } else {
+                $('#id_lastname').addClass('is-invalid')
+                $('#id_lastname').removeClass('is-valid')
+            }
+        });
+        $('#id_mobile').keyup(function () {
+            var mobile_regex = new RegExp('^09[0-9]{9}$');
+            if (this.value.match(mobile_regex)) {
+                $('#id_mobile').removeClass('is-invalid')
+                $('#id_mobile').addClass('is-valid')
+            } else {
+                $('#id_mobile').addClass('is-invalid')
+                $('#id_mobile').removeClass('is-valid')
+            }
+        });
+        $('#id_code').keyup(function () {
+            if (this.value.length == 5) {
+                $.ajax({
+                    url: '{% url 'interviwer_name' %}',
+                    type: 'GET',
+                    data: {'code': this.value},
+                    success: function (response) {
+                        $('#id_code').removeClass('is-invalid')
+                        $('#id_code').addClass('is-valid')
+                        $('.interviewer').text(response['name'])
+                    },
+                    error:
+                        function (response) {
+                            $('.interviewer-error').text('کد پرسشگر اشتباه است')
+                            $('#id_code').addClass('is-invalid')
+                            $('#id_code').removeClass('is-valid')
+                        }
+                });
+            } else {
+                code.addClass('is-invalid')
+                code.removeClass('is-valid')
+            }
+        });
+        $('#id_city').change(function () {
+            if (this.value !== '') {
+                $('#id_city').removeClass('is-invalid')
+                $('#id_city').addClass('is-valid')
+            } else {
+                $('#id_city').addClass('is-invalid')
+                $('#id_city').removeClass('is-valid')
+            }
+        });
+        {% comment %}$(document).ready(function () {
+            if ($('input[name=date]').value !== undefined) {
+                if ($('input[name=date]').value.length == 10) {
+                    date.removeClass('is-invalid')
+                    date.addClass('is-valid')
+                }
+            } else {
+                date.addClass('is-invalid')
+                date.removeClass('is-valid')
+            }
+            if ($('#id_firstname').value !== undefined) {
+                if ($('#id_firstname').value.length >= 1) {
+                    firstname.removeClass('is-invalid')
+                    firstname.addClass('is-valid')
+                }
+            } else {
+                firstname.addClass('is-invalid')
+                firstname.removeClass('is-valid')
+            }
+            if ($('#id_lastname').value !== undefined) {
+                if ($('#id_lastname').value.length >= 1) {
+                    lastname.removeClass('is-invalid')
+                    lastname.addClass('is-valid')
+                }
+            } else {
+                lastname.addClass('is-invalid')
+                lastname.removeClass('is-valid')
+            }
+            if ($('#id_mobile').value !== undefined) {
+                var mobile_regex = new RegExp('^09[0-9]{9}$');
+                if ($('#id_mobile').value.match(mobile_regex)) {
+                    mobile.removeClass('is-invalid')
+                    mobile.addClass('is-valid')
+                }
+            } else {
+                mobile.addClass('is-invalid')
+                mobile.removeClass('is-valid')
+            }
+            if ($('#id_code').value !== undefined) {
+                if ($('#id_code').value.length == 5) {
+                    code.removeClass('is-invalid')
+                    code.addClass('is-valid')
+                }
+            } else {
+                code.addClass('is-invalid')
+                code.removeClass('is-valid')
+            }
+            if ($('#id_city').value !== undefined) {
+                if ($('#id_city').value !== '') {
+                    city.removeClass('is-invalid')
+                    city.addClass('is-valid')
+                }
+            } else {
+                city.addClass('is-invalid')
+                city.removeClass('is-valid')
+            }
+        });{% endcomment %}
+        $('form').submit(function () {
+            console.log('submit')
+        });
+    </script>
+{% endblock %}
+{% block exta_header %}
+    <script src="https://unpkg.com/jalali-moment/dist/jalali-moment.browser.js"></script>
+    <style>
+        input {
+            margin-bottom: 0px;
+        }
+
+        .valid-feedback, .invalid-feedback {
+            margin-bottom: 5px;
+        }
+    </style>
+{% endblock %}
