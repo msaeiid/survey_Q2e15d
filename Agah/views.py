@@ -13,7 +13,6 @@ class Survey_View(DetailView):
     context_object_name = 'Survey'
 
 
-
 @csrf_protect
 def Personal(request, pk):
     answersheet = request.session.get('answersheet', None)
@@ -104,25 +103,17 @@ def Social(request):
     T2 = T1.next_question
     T3 = T2.next_question
     if request.method == 'GET':
-        Q2_form = Question_form(request.GET, instance=Q2)
-        Q3_form = Question_form(request.GET, instance=Q3)
-        Q4_form = Question_form(request.GET, instance=Q4)
-        Q4_1_form = Question_form(request.GET, instance=Q4_1)
-        T1_from = Question_form(request.GET, instance=T1)
-        T2_form = Question_form(request.GET, instance=T2)
-        T3_from = Question_form(request.GET, instance=T3,
-                                initial={'regions': T3.regions.filter(city=answersheet.responser.city)})
-        context = {'Q2': Q2, 'Q2_form': Q2_form,
-                   'Q3': Q3, 'Q3_form': Q3_form,
-                   'Q4': Q4, 'Q4_form': Q4_form,
-                   'Q4_1': Q4_1, 'Q4_1_form': Q4_1_form,
-                   'T1': T1, 'T1_from': T1_from,
-                   'T2': T2, 'T2_form': T2_form,
-                   'T3': T3, 'T3_from': T3_from,
-                   'answersheet': answersheet,
-                   }
+        form = Question_form(request.GET,
+                             instance={'Q2': Q2, 'Q3': Q3, 'Q4': Q4, 'Q4_1': Q4_1, 'T1': T1, 'T2': T2, 'T3': T3,
+                                       'regions': T3.regions.filter(city=answersheet.responser.city)})
+        context = {'Q2': Q2, 'Q3': Q3, 'Q4': Q4, 'Q4_1': Q4_1, 'T1': T1, 'T2': T2, 'T3': T3, 'answersheet': answersheet,
+                   'form': form}
         return render(request, 'Social.html', context)
     else:
-        print('')
-        pass
+        form = Question_form(request.POST,
+                             instance={'Q2': Q2, 'Q3': Q3, 'Q4': Q4, 'Q4_1': Q4_1, 'T1': T1, 'T2': T2, 'T3': T3,
+                                       'regions': T3.regions.filter(city=answersheet.responser.city)})
+        if form.is_valid():
+            print('')
+            pass
 # Create your views here.

@@ -27,11 +27,11 @@
                 {{ Q2.code }}
                 {{ Q2.title }}
             </h5>
-            {{ Q2_form.age_year }}
+            {{ form.age_year }}
             <div class="valid-feedback valid-age">
             </div>
             <div class="invalid-feedback">
-                {{ Q2_form.errors.age_year.as_text }}
+                {{ form.errors.age_year.as_text }}
             </div>
         </div>
         <div class="question">
@@ -39,12 +39,12 @@
                 {{ Q3.code }}
                 {{ Q3.title }}
             </h5>
-            {{ Q3_form.marital_status }}
+            {{ form.marital_status }}
             <div class="valid-feedback valid-age">
                 معتبر
             </div>
             <div class="invalid-feedback">
-                {{ Q3_form.marital_status.errors.as_text }}
+                {{ form.marital_status.errors.as_text }}
             </div>
         </div>
         <div class="child hide question">
@@ -52,7 +52,7 @@
                 {{ Q4.code }}
                 {{ Q4.title }}
             </h5>
-            {{ Q4_form.numer_of_child }}
+            {{ form.numer_of_child }}
             <div class="valid-feedback">
                 معتبر
             </div>
@@ -69,69 +69,69 @@
                 <h6>فرزند اول</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.first_child_year.label }}
-                    {{ Q4_1_form.first_child_year }}
-                    {{ Q4_1_form.first_child_gender.label }}
-                    {{ Q4_1_form.first_child_gender }}
-                    {{ Q4_1_form.first_child_age.label }}
-                    {{ Q4_1_form.first_child_age }}
+                    {{ form.first_child_year.label }}
+                    {{ form.first_child_year }}
+                    {{ form.first_child_gender.label }}
+                    {{ form.first_child_gender }}
+                    {{ form.first_child_age.label }}
+                    {{ form.first_child_age }}
                 </div>
             </div>
             <div id="two_children" class="hide">
                 <h6>فرزند اول</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.first_child_year.label }}
-                    {{ Q4_1_form.first_child_year }}
-                    {{ Q4_1_form.first_child_gender.label }}
-                    {{ Q4_1_form.first_child_gender }}
-                    {{ Q4_1_form.first_child_age.label }}
-                    {{ Q4_1_form.first_child_age }}
+                    {{ form.first_child_year.label }}
+                    {{ form.first_child_year }}
+                    {{ form.first_child_gender.label }}
+                    {{ form.first_child_gender }}
+                    {{ form.first_child_age.label }}
+                    {{ form.first_child_age }}
                 </div>
                 <hr>
                 <h6>فرزند دوم</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.second_child_year.label }}
-                    {{ Q4_1_form.second_child_year }}
-                    {{ Q4_1_form.second_child_gender.label }}
-                    {{ Q4_1_form.second_child_gender }}
-                    {{ Q4_1_form.second_child_age.label }}
-                    {{ Q4_1_form.second_child_age }}
+                    {{ form.second_child_year.label }}
+                    {{ form.second_child_year }}
+                    {{ form.second_child_gender.label }}
+                    {{ form.second_child_gender }}
+                    {{ form.second_child_age.label }}
+                    {{ form.second_child_age }}
                 </div>
             </div>
             <div id="three_children" class="hide">
                 <h6>فرزند اول</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.first_child_year.label }}
-                    {{ Q4_1_form.first_child_year }}
-                    {{ Q4_1_form.first_child_gender.label }}
-                    {{ Q4_1_form.first_child_gender }}
-                    {{ Q4_1_form.first_child_age.label }}
-                    {{ Q4_1_form.first_child_age }}
+                    {{ form.first_child_year.label }}
+                    {{ form.first_child_year }}
+                    {{ form.first_child_gender.label }}
+                    {{ form.first_child_gender }}
+                    {{ form.first_child_age.label }}
+                    {{ form.first_child_age }}
                 </div>
                 <hr>
                 <h6>فرزند دوم</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.second_child_year.label }}
-                    {{ Q4_1_form.second_child_year }}
-                    {{ Q4_1_form.second_child_gender.label }}
-                    {{ Q4_1_form.second_child_gender }}
-                    {{ Q4_1_form.second_child_age.label }}
-                    {{ Q4_1_form.second_child_age }}
+                    {{ form.second_child_year.label }}
+                    {{ form.second_child_year }}
+                    {{ form.second_child_gender.label }}
+                    {{ form.second_child_gender }}
+                    {{ form.second_child_age.label }}
+                    {{ form.second_child_age }}
                 </div>
                 <hr>
                 <h6>فرزند سوم</h6>
                 <br>
                 <div class="row">
-                    {{ Q4_1_form.third_child_year.label }}
-                    {{ Q4_1_form.third_child_year }}
-                    {{ Q4_1_form.third_child_gender.label }}
-                    {{ Q4_1_form.third_child_gender }}
-                    {{ Q4_1_form.third_child_age.label }}
-                    {{ Q4_1_form.third_child_age }}
+                    {{ form.third_child_year.label }}
+                    {{ form.third_child_year }}
+                    {{ form.third_child_gender.label }}
+                    {{ form.third_child_gender }}
+                    {{ form.third_child_age.label }}
+                    {{ form.third_child_age }}
                 </div>
             </div>
         </div>
@@ -140,14 +140,14 @@
                 {{ T1.code }}
                 {{ T1.title }}
             </h5>
-            {{ T1_from.home }}
+            {{ form.home }}
         </div>
         <div class="question">
             <h5>
                 {{ T2.code }}
                 {{ T2.title }}
             </h5>
-            {% for job in T2_form.job %}
+            {% for job in form.job %}
                 <div class="form-check">
                     {{ job }}
                 </div>
@@ -159,7 +159,7 @@
                 {{ T3.code }}
                 {{ T3.title }}
             </h5>
-            {{ T3_from.region }}
+            {{ form.region }}
         </div>
         <input type="hidden" name="age">
         <button type="submit" class="btn btn-primary btn-lg col-lg-4 col-md-4 col-sm-6 col-6">بعد</button>
