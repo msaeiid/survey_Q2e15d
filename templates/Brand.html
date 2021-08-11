@@ -1,0 +1,114 @@
+{% extends 'Base.html' %}
+{% block title %}
+    آگاهی برند
+{% endblock %}
+{% block content %}
+    <form method="post">
+        <div class="question 1">
+            <h5>
+                {{ A1.code }}
+                {{ A1.title }}
+            </h5>
+            <div id="option">
+                گزینه های A1
+            </div>
+        </div>
+        <div class="question hide 2">
+            <h5>
+                {{ A2.code }}
+                {{ A2.title }}
+            </h5>
+            <div id="option">
+                گزینه های A2
+            </div>
+        </div>
+        <div class="question hide 3">
+            <h5>
+                {{ A4.code }}
+                {{ A4.title }}
+            </h5>
+            <div id="option">
+                گزینه های A4
+            </div>
+        </div>
+        <div class="question hide 4">
+            <h5>
+                {{ A6.code }}
+                {{ A6.title }}
+            </h5>
+            <div id="option">
+                گزینه های A6
+            </div>
+        </div>
+        <div class="question hide 5">
+            <h5>
+                {{ A7.code }}
+                {{ A7.title }}
+            </h5>
+            <div id="option">
+                گزینه های A7
+            </div>
+        </div>
+        <div class="question hide 6">
+            <h5>
+                {{ A8.code }}
+                {{ A8.title }}
+            </h5>
+            <div id="option">
+                گزینه های A8
+            </div>
+        </div>
+        <div class="question hide 7">
+            <h5>
+                {{ A9.code }}
+                {{ A9.title }}
+            </h5>
+            <div id="option">
+                گزینه های A9
+            </div>
+        </div>
+        <div class="question hide 8">
+            <h5>
+                {{ A10.code }}
+                {{ A10.title }}
+            </h5>
+            <div id="option">
+                گزینه های A10
+            </div>
+        </div>
+        <div class="question hide 9">
+            <h5>
+                {{ A11.code }}
+                {{ A11.title }}
+            </h5>
+            <div id="option">
+                گزینه های A11
+            </div>
+        </div>
+        <div class="question hide 10">
+            <h5>
+                {{ A12.code }}
+                {{ A12.title }}
+            </h5>
+            <div id="option">
+                گزینه های A12
+            </div>
+        </div>
+        <div class="clearfix">
+            <button type="button" name="previous" class="float-right btn btn-primary col-lg-3 col-md-3 col-sm-3 col-12">
+                پرسش قبل
+            </button>
+            <button type="submit" class="btn btn-success col-lg-3 col-md-3 col-sm-3 col-12">ثبت</button>
+            <button type="button" name="next" class="float-left btn btn-primary col-lg-3 col-md-3 col-sm-3 col-12">پرسش
+                بعد
+            </button>
+        </div>
+    </form>
+{% endblock %}
+{% block exta_header %}
+    <style>
+    .clearfix button[type=submit]{
+        text-align: center;
+    }
+    </style>
+{% endblock %}

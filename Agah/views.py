@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView
 from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form
 from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child
+from django.contrib import messages
 
 
 class Survey_View(DetailView):
@@ -26,7 +27,6 @@ def Personal(request, pk):
         else:
             import jdatetime
             answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
-            # TODO: here i should convert date again
             answersheet.date = str(
                 jdatetime.date.fromgregorian(year=answersheet.date.year, month=answersheet.date.month,
                                              day=answersheet.date.day))
@@ -74,9 +74,9 @@ def Personal(request, pk):
                     answersheet.responser.city_id = responder_frm.cleaned_data.get('city')
                     answersheet.responser.save()
         request.session['answersheet'] = answersheet.pk
-        request.session['survey'] = survey.pk
-        request.session['question'] = Q1.next_question.pk
-        return redirect(reverse('social'))
+        request.session['survey'] = survey.pk  # todo: should i delete?
+        request.session['question'] = Q1.next_question.pk  # todo: should i delete?
+        return redirect(reverse('agah:social'))
 
 
 def interviwer_name(request):
@@ -139,14 +139,14 @@ def Social(request):
         del age
         if marital_status == 0 or age_category == 0:
             answersheet.delete()
-            print('full')
-            # TODO redirect to end with message...
+            messages.info(request=request, message=('به علت عدم پاسخ به وضعيت تاهل نظرسنجی به اتمام رسید.'))
+            return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
             if not limit.check_for_capacity():
                 answersheet.delete()
-                print('full')
-                # TODO redirect to end with message...
+                messages.info(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
+                return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
 
         # Q2 save answer...
         answer = None
@@ -245,4 +245,23 @@ def Social(request):
                 child.save()
 
         answersheet.calculate_total_point()
-        print('')
+        return redirect(reverse('agah:brand'))
+
+
+def Brand(request):
+    A1 = Question.objects.get(code='A1')
+    A2 = Question.objects.get(code='A2')
+    A4 = Question.objects.get(code='A4')
+    A6 = Question.objects.get(code='A6')
+    A7 = Question.objects.get(code='A7')
+    A8 = Question.objects.get(code='A8')
+    A9 = Question.objects.get(code='A9')
+    A10 = Question.objects.get(code='A10')
+    A11 = Question.objects.get(code='A11')
+    A12 = Question.objects.get(code='A12')
+    if request.method == 'GET':
+        context = {'A1': A1, 'A2': A2, 'A4': A4, 'A6': A6, 'A7': A7, 'A8': A8, 'A9': A9, 'A10': A10, 'A11': A11,
+                   'A12': A12}
+        return render(request, '../templates/Brand.html', context=context)
+    else:
+        pass

@@ -161,7 +161,7 @@
         $('#id_code').keyup(function () {
             if (this.value.length == 5) {
                 $.ajax({
-                    url: '{% url 'interviwer_name' %}',
+                    url: '{% url 'agah:interviwer_name' %}',
                     type: 'GET',
                     data: {'code': this.value},
                     success: function (response) {

@@ -1,4 +1,14 @@
 {% extends 'Base.html' %}
 {% block content %}
-    <a href="{% url 'persnoal' Survey.pk %}">{{ Survey.title }}</a>
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'agah:persnoal' Survey.pk %}">{{ Survey.title }}</a>
 {% endblock %}
