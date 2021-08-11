@@ -372,6 +372,20 @@
                 result = 'عصر'
             }
             $('#amORpm').text(result)
+            if ($('input[name=age_year]').val() != undefined) {
+                if (parseInt($('input[name=age_year]').val()) < parseInt($('input[name=age_year]').min) || parseInt($('input[name=age_year]').val()) > parseInt($('input[name=age_year]').max)) {
+                    $('input[name=age_year]').addClass('is-invalid')
+                    $('input[name=age_year]').removeClass('is-valid')
+                } else if ($('input[name=age_year]').val().length == 4) {
+                    var m = moment();
+                    m.locale('fa');
+                    var age = parseInt(m.format('YYYY')) - parseInt(parseInt($('input[name=age_year]').val()))
+                    $('.valid-age').text('معتبر')
+                    $('input[type=hidden][name=age]').val(age)
+                    $('input[name=age_year]').removeClass('is-invalid')
+                    $('input[name=age_year]').addClass('is-valid')
+                }
+            }
         });
         $('form').submit(function () {
             var count = $('input[type=checkbox]:checked').length;
