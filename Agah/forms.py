@@ -37,8 +37,7 @@ class Interviewer_form(ModelForm):
 
 class Question_form(forms.Form):
 
-
-    def __init__(self,*args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(Question_form, self).__init__()
         Q2 = kwargs.get('instance').get('Q2')
         Q3 = kwargs.get('instance').get('Q3')
@@ -76,7 +75,7 @@ class Question_form(forms.Form):
         self.fields['region'] = forms.ChoiceField(choices=region_choices, required=True)
 
         # Q4
-        self.fields['number_of_child'] = forms.IntegerField(min_value=0, max_value=100, required=False)
+        self.fields['number_of_child'] = forms.IntegerField(min_value=0, max_value=100, required=False, disabled=True)
 
         # T2
         job_choices = []
@@ -91,17 +90,19 @@ class Question_form(forms.Form):
                           ('boy', 'پسر'),
                           ('girl', 'دختر'),)
         self.fields['first_child_year'] = forms.IntegerField(label='سال تولد', min_value=1300, max_value=1400,
-                                                             required=False)
-        self.fields['first_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False)
-        self.fields['first_child_age'] = forms.IntegerField(label='سن', required=False)
+                                                             required=False, disabled=True)
+        self.fields['first_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False,
+                                                              disabled=True)
+        self.fields['first_child_age'] = forms.IntegerField(label='سن', required=False, disabled=True)
 
         self.fields['second_child_year'] = forms.IntegerField(label='سال تولد', min_value=1300, max_value=1400,
-                                                              required=False)
+                                                              required=False, disabled=True)
         self.fields['second_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices,
-                                                               required=False)
-        self.fields['second_child_age'] = forms.IntegerField(label='سن', required=False)
+                                                               required=False, disabled=True)
+        self.fields['second_child_age'] = forms.IntegerField(label='سن', required=False, disabled=True)
 
         self.fields['third_child_year'] = forms.IntegerField(label='سال تولد', min_value=1300, max_value=1400,
-                                                             required=False)
-        self.fields['third_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False)
-        self.fields['third_child_age'] = forms.IntegerField(label='سن', required=False)
+                                                             required=False, disabled=True)
+        self.fields['third_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False,
+                                                              disabled=True)
+        self.fields['third_child_age'] = forms.IntegerField(label='سن', required=False, disabled=True)

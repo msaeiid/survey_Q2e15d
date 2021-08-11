@@ -177,6 +177,7 @@
             if (this.value == 2 || this.value == 3 || this.value == 4) {
                 $('.child').removeClass('hide')
                 $('input[name=number_of_child]').prop('required', true)
+                $('input[name=number_of_child]').prop('disabled', false)
             } else {
                 $('.child').addClass('hide')
                 $('.Q4_1').addClass('hide')
@@ -191,12 +192,27 @@
             $('input[name=first_child_year]').val('')
             $('input[name=second_child_year]').val('')
             $('input[name=third_child_year]').val('')
+            //required
             $('input[name=first_child_year]').prop('required', false)
             $('input[name=second_child_year]').prop('required', false)
             $('input[name=third_child_year]').prop('required', false)
             $('select[name=first_child_gender]').prop('required', false)
             $('select[name=second_child_gender]').prop('required', false)
             $('select[name=third_child_gender]').prop('required', false)
+            $('select[name=first_child_age]').prop('required', false)
+            $('select[name=second_child_age]').prop('required', false)
+            $('select[name=third_child_age]').prop('required', false)
+            //disabled
+            $('input[name=first_child_year]').prop('disabled', true)
+            $('input[name=second_child_year]').prop('disabled', true)
+            $('input[name=third_child_year]').prop('disabled', true)
+            $('select[name=first_child_gender]').prop('disabled', true)
+            $('select[name=second_child_gender]').prop('disabled', true)
+            $('select[name=third_child_gender]').prop('disabled', true)
+            $('select[name=first_child_age]').prop('disabled', true)
+            $('select[name=second_child_age]').prop('disabled', true)
+            $('select[name=third_child_age]').prop('disabled', true)
+
             if (parseInt(this.value) == 0) {
                 $('.Q4_1').addClass('hide')
             } else if (parseInt(this.value) == 1) {
@@ -204,30 +220,53 @@
                 $('#one_children').removeClass('hide')
                 $('#two_children').addClass('hide')
                 $('#three_children').addClass('hide')
+                //required
                 $('#one_children input[name=first_child_year]').prop('required', true)
                 $('#one_children select[name=first_child_gender]').prop('required', true)
-
+                //disabled
+                $('#one_children input[name=first_child_year]').prop('disabled', false)
+                $('#one_children select[name=first_child_gender]').prop('disabled', false)
+                $('#one_children input[name=first_child_age]').prop('disabled', false)
             } else if (parseInt(this.value) == 2) {
                 $('.Q4_1').removeClass('hide')
                 $('#one_children').addClass('hide')
                 $('#two_children').removeClass('hide')
                 $('#three_children').addClass('hide')
+                //required
                 $('#two_children input[name=first_child_year]').prop('required', true)
                 $('#two_children input[name=second_child_year]').prop('required', true)
                 $('#two_children select[name=first_child_gender]').prop('required', true)
                 $('#two_children select[name=second_child_gender]').prop('required', true)
+                //disabled
+                $('#two_children input[name=first_child_year]').prop('disabled', false)
+                $('#two_children input[name=second_child_year]').prop('disabled', false)
+                $('#two_children select[name=first_child_gender]').prop('disabled', false)
+                $('#two_children select[name=second_child_gender]').prop('disabled', false)
+                $('#two_children input[name=first_child_age]').prop('disabled', false)
+                $('#two_children input[name=second_child_age]').prop('disabled', false)
 
             } else if (parseInt(this.value) >= 3) {
                 $('.Q4_1').removeClass('hide')
                 $('#one_children').addClass('hide')
                 $('#two_children').addClass('hide')
                 $('#three_children').removeClass('hide')
+                //required
                 $('#three_children input[name=first_child_year]').prop('required', true)
                 $('#three_children input[name=second_child_year]').prop('required', true)
                 $('#three_children input[name=third_child_year]').prop('required', true)
                 $('#three_children select[name=first_child_gender]').prop('required', true)
                 $('#three_children select[name=second_child_gender]').prop('required', true)
                 $('#three_children select[name=third_child_gender]').prop('required', true)
+                //disabled
+                $('#three_children input[name=first_child_year]').prop('disabled', false)
+                $('#three_children input[name=second_child_year]').prop('disabled', false)
+                $('#three_children input[name=third_child_year]').prop('disabled', false)
+                $('#three_children select[name=first_child_gender]').prop('disabled', false)
+                $('#three_children select[name=second_child_gender]').prop('disabled', false)
+                $('#three_children select[name=third_child_gender]').prop('disabled', false)
+                $('#three_children input[name=first_child_age]').prop('disabled', false)
+                $('#three_children input[name=second_child_age]').prop('disabled', false)
+                $('#three_children input[name=third_child_age]').prop('disabled', false)
             }
         })
         $('input[name=age_year]').keyup(function () {

@@ -172,15 +172,16 @@ def Social(request):
         answer.save()
 
         # Q4 save answer...
-        number_of_child = int(request.POST.get('number_of_child'))
-        if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=Q4, answersheet=answersheet)
-            Child.objects.filter(responder=answersheet.responser).delete()
-            answer.answer = number_of_child
-            answer.point = 0
-        else:
-            answer = Answer(question=Q4, answersheet=answersheet, answer=number_of_child, point=0)
-        answer.save()
+        number_of_child = request.POST.get('number_of_child', None)
+        if number_of_child is not None:
+            if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
+                answer = Answer.objects.get(question=Q4, answersheet=answersheet)
+                Child.objects.filter(responder=answersheet.responser).delete()
+                answer.answer = int(number_of_child)
+                answer.point = 0
+            else:
+                answer = Answer(question=Q4, answersheet=answersheet, answer=int(number_of_child), point=0)
+            answer.save()
 
         # T1 save answer...
         home = request.POST.get('home')
@@ -216,27 +217,28 @@ def Social(request):
         answer.save()
 
         # T4_1 save answer...
-        if number_of_child in [1, 2, 3]:
-            first_child_year = int(request.POST.get('first_child_year'))
-            first_child_gender = request.POST.get('first_child_gender')
-            first_child_age = int(request.POST.get('first_child_age'))
-            child = Child(responder=answersheet.responser, gender=first_child_gender, birthday_year=first_child_year,
-                          age=first_child_age)
-            child.save()
+        if number_of_child is not None:
+            if int(number_of_child) in [1, 2, 3]:
+                first_child_year = int(request.POST.get('first_child_year'))
+                first_child_gender = request.POST.get('first_child_gender')
+                first_child_age = int(request.POST.get('first_child_age'))
+                child = Child(responder=answersheet.responser, gender=first_child_gender, birthday_year=first_child_year,
+                              age=first_child_age)
+                child.save()
 
-        if number_of_child in [2, 3]:
-            second_child_year = int(request.POST.get('second_child_year'))
-            second_child_gender = request.POST.get('second_child_gender')
-            second_child_age = int(request.POST.get('second_child_age'))
-            child = Child(responder=answersheet.responser, gender=second_child_gender, birthday_year=second_child_year,
-                          age=second_child_age)
-            child.save()
-        if number_of_child >= 3:
-            third_child_year = int(request.POST.get('third_child_year'))
-            third_child_gender = request.POST.get('third_child_gender')
-            third_child_age = int(request.POST.get('third_child_age'))
-            child = Child(responder=answersheet.responser, gender=third_child_gender, birthday_year=third_child_year,
-                          age=third_child_age)
-            child.save()
+            if int(number_of_child) in [2, 3]:
+                second_child_year = int(request.POST.get('second_child_year'))
+                second_child_gender = request.POST.get('second_child_gender')
+                second_child_age = int(request.POST.get('second_child_age'))
+                child = Child(responder=answersheet.responser, gender=second_child_gender, birthday_year=second_child_year,
+                              age=second_child_age)
+                child.save()
+            if int(number_of_child) >= 3:
+                third_child_year = int(request.POST.get('third_child_year'))
+                third_child_gender = request.POST.get('third_child_gender')
+                third_child_age = int(request.POST.get('third_child_age'))
+                child = Child(responder=answersheet.responser, gender=third_child_gender, birthday_year=third_child_year,
+                              age=third_child_age)
+                child.save()
 
-            print('')
+        print('')
