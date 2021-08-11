@@ -29,8 +29,8 @@ class SurveyCustom(admin.ModelAdmin):
 
 
 class QuestionCustom(admin.ModelAdmin):
-    list_display = ('survey','code', 'title','type', 'previous_question','next_question',)
-    list_editable = ('previous_question','next_question','type',)
+    list_display = ('survey', 'code', 'title', 'type', 'previous_question', 'next_question',)
+    list_editable = ('previous_question', 'next_question', 'type',)
 
 
 class OptionCustom(admin.ModelAdmin):
@@ -39,12 +39,12 @@ class OptionCustom(admin.ModelAdmin):
 
 
 class AnswerCustom(admin.ModelAdmin):
-    list_display = ('answersheet', 'question', 'answer', 'option', 'point')
+    list_display = ('answersheet', 'question', 'answer', 'point',)
 
 
 class RegionCustom(admin.ModelAdmin):
     list_display = ('city', 'question', 'title', 'value', 'point',)
-    list_editable = ( 'question', 'title', 'value', 'point',)
+    list_editable = ('question', 'title', 'value', 'point',)
 
 
 class ChildCustom(admin.ModelAdmin):

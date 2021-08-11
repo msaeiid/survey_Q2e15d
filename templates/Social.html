@@ -52,7 +52,7 @@
                 {{ Q4.code }}
                 {{ Q4.title }}
             </h5>
-            {{ form.numer_of_child }}
+            {{ form.number_of_child }}
             <div class="valid-feedback">
                 معتبر
             </div>
@@ -176,18 +176,18 @@
         $('select[name=marital_status]').change(function () {
             if (this.value == 2 || this.value == 3 || this.value == 4) {
                 $('.child').removeClass('hide')
-                $('input[name=numer_of_child]').prop('required', true)
+                $('input[name=number_of_child]').prop('required', true)
             } else {
                 $('.child').addClass('hide')
                 $('.Q4_1').addClass('hide')
-                $('input[name=numer_of_child]').val('')
-                $('input[name=numer_of_child]').prop('required', false)
+                $('input[name=number_of_child]').val('')
+                $('input[name=number_of_child]').prop('required', false)
                 $('input[name=first_child_year]').val('')
                 $('input[name=second_child_year]').val('')
                 $('input[name=third_child_year]').val('')
             }
         });
-        $('input[name=numer_of_child]').keyup(function () {
+        $('input[name=number_of_child]').keyup(function () {
             $('input[name=first_child_year]').val('')
             $('input[name=second_child_year]').val('')
             $('input[name=third_child_year]').val('')
@@ -244,13 +244,13 @@
                 $('input[name=age_year]').addClass('is-valid')
             }
         });
-        $('input[name=numer_of_child]').keyup(function () {
+        $('input[name=number_of_child]').keyup(function () {
             if (parseInt(this.value) < parseInt(this.min) || parseInt(this.value) > parseInt(this.max)) {
-                $('input[name=numer_of_child]').addClass('is-invalid')
-                $('input[name=numer_of_child]').removeClass('is-valid')
+                $('input[name=number_of_child]').addClass('is-invalid')
+                $('input[name=number_of_child]').removeClass('is-valid')
             } else {
-                $('input[name=numer_of_child]').removeClass('is-invalid')
-                $('input[name=numer_of_child]').addClass('is-valid')
+                $('input[name=number_of_child]').removeClass('is-invalid')
+                $('input[name=number_of_child]').addClass('is-valid')
             }
         });
         $('input[name=first_child_year]').keyup(function () {
@@ -333,6 +333,24 @@
                 result = 'عصر'
             }
             $('#amORpm').text(result)
+        });
+        $('form').submit(function () {
+            var count = $('input[type=checkbox]:checked').length;
+            if (count >= 1 && count <= 3) {
+                $('input[type=checkbox]').addClass('is-valid')
+                $('input[type=checkbox]').removeClass('is-invalid')
+                return true
+            } else if (count == 0) {
+                $('input[type=checkbox]').removeClass('is-valid')
+                $('input[type=checkbox]').addClass('is-invalid')
+                alert('لطفاحداقل یک  شغل را انتخاب کنید')
+                return false
+            } else {
+                $('input[type=checkbox]').removeClass('is-valid')
+                $('input[type=checkbox]').addClass('is-invalid')
+                alert('لطفا حداکثر سه شغل را انتخاب کنید')
+                return false
+            }
         });
     </script>
 {% endblock %}

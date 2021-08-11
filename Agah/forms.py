@@ -76,7 +76,7 @@ class Question_form(forms.Form):
         self.fields['region'] = forms.ChoiceField(choices=region_choices, required=True)
 
         # Q4
-        self.fields['numer_of_child'] = forms.IntegerField(min_value=0, max_value=100, required=False)
+        self.fields['number_of_child'] = forms.IntegerField(min_value=0, max_value=100, required=False)
 
         # T2
         job_choices = []

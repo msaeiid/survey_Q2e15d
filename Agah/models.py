@@ -177,9 +177,9 @@ class AnswerSheet(models.Model):
 
     interviewer = models.ForeignKey(verbose_name='پرسشگر', on_delete=models.PROTECT, to=Interviewer, blank=False,
                                     null=False, editable=True)
-    responser = models.ForeignKey(verbose_name='پاسخگو', on_delete=models.CASCADE, to=Responder, blank=False,
+    responser = models.ForeignKey(verbose_name='پاسخگو', on_delete=models.PROTECT, to=Responder, blank=False,
                                   null=False, editable=True)
-    survey = models.ForeignKey(verbose_name='پرسشنامه', to='Survey', on_delete=models.CASCADE, blank=False, null=False,
+    survey = models.ForeignKey(verbose_name='پرسشنامه', to='Survey', on_delete=models.PROTECT, blank=False, null=False,
                                editable=True)
     date = models.DateField(verbose_name='تاریخ مصاحبه', blank=False, null=False, editable=True)
     day = models.CharField(verbose_name='روز هفته', max_length=20, blank=False, null=False, editable=True, )
@@ -217,13 +217,11 @@ class Answer(models.Model):
         verbose_name_plural = 'پاسخ'
         ordering = ['answersheet', 'question']
 
-    question = models.ForeignKey(verbose_name='پرسش', to=Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(verbose_name='پرسش', to=Question, on_delete=models.PROTECT)
     answersheet = models.ForeignKey(verbose_name='پاسخنامه', to=AnswerSheet, related_name='answers',
                                     on_delete=models.CASCADE)
     answer = models.CharField(verbose_name='پاسخ', max_length=10, default=None, null=False, blank=False)
-    point = models.PositiveSmallIntegerField(verbose_name='امتیاز', editable=False, null=False, blank=False,
-                                             default=0)  # todo:do I need it?
-    option = models.ForeignKey(verbose_name='گزینه', on_delete=models.CASCADE, to=Option, null=True, blank=True)
+    point = models.PositiveSmallIntegerField(verbose_name='امتیاز', editable=True, null=False, blank=False, default=0)
 
     def __str__(self):
         return f'پاسخ سوال' \
@@ -254,7 +252,7 @@ class Limit(models.Model):
     def __str__(self):
         return f'{self.marital_status}          {self.age}'
 
-    def check_(self):
+    def check_for_capacity(self):
         if self.maximum > self.capacity:
             self.capacity += 1
             self.save()
