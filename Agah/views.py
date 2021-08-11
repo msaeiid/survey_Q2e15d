@@ -222,7 +222,8 @@ def Social(request):
                 first_child_year = int(request.POST.get('first_child_year'))
                 first_child_gender = request.POST.get('first_child_gender')
                 first_child_age = int(request.POST.get('first_child_age'))
-                child = Child(responder=answersheet.responser, gender=first_child_gender, birthday_year=first_child_year,
+                child = Child(responder=answersheet.responser, gender=first_child_gender,
+                              birthday_year=first_child_year,
                               age=first_child_age)
                 child.save()
 
@@ -230,15 +231,18 @@ def Social(request):
                 second_child_year = int(request.POST.get('second_child_year'))
                 second_child_gender = request.POST.get('second_child_gender')
                 second_child_age = int(request.POST.get('second_child_age'))
-                child = Child(responder=answersheet.responser, gender=second_child_gender, birthday_year=second_child_year,
+                child = Child(responder=answersheet.responser, gender=second_child_gender,
+                              birthday_year=second_child_year,
                               age=second_child_age)
                 child.save()
             if int(number_of_child) >= 3:
                 third_child_year = int(request.POST.get('third_child_year'))
                 third_child_gender = request.POST.get('third_child_gender')
                 third_child_age = int(request.POST.get('third_child_age'))
-                child = Child(responder=answersheet.responser, gender=third_child_gender, birthday_year=third_child_year,
+                child = Child(responder=answersheet.responser, gender=third_child_gender,
+                              birthday_year=third_child_year,
                               age=third_child_age)
                 child.save()
 
+        answersheet.calculate_total_point()
         print('')
