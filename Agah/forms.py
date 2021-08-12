@@ -118,30 +118,39 @@ class Brand_form(forms.Form):
         brands_lst = tuple(brands_lst)
         if question.code == 'A1':
             self.fields['A1'] = forms.MultipleChoiceField(label='', choices=brands_lst, widget=forms.RadioSelect,
-                                                          required=True)
+                                                          required=False)
         elif question.code == 'A2':
             self.fields['A2'] = forms.MultipleChoiceField(label='', choices=brands_lst,
-                                                          widget=forms.CheckboxSelectMultiple, required=True)
+                                                          widget=forms.CheckboxSelectMultiple, required=False)
         elif question.code == 'A4':
             self.fields['A4'] = forms.MultipleChoiceField(label='', choices=brands_lst,
-                                                          widget=forms.CheckboxSelectMultiple, required=True)
+                                                          widget=forms.CheckboxSelectMultiple, required=False)
         elif question.code == 'A6':
             self.fields['A6'] = forms.MultipleChoiceField(label='', choices=brands_lst,
-                                                          widget=forms.CheckboxSelectMultiple, required=True)
+                                                          widget=forms.CheckboxSelectMultiple, required=False)
         elif question.code == 'A7' or question.code == 'A8' or question.code == 'A9' or question.code == 'A10':
+            counter = 0
             for brand in brands:
-                self.fields[f'{question.code} {brand.title}'] = forms.IntegerField(label='')
-                self.fields[f'{question.code} {brand.title}'].widget.attrs['placeholder'] = brand.title
+                counter += 1
+                self.fields[f'{question.code}-{counter}'] = forms.IntegerField(label='', required=False)
+                self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
+                self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
+                self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 if question.code == 'A8':
-                    self.fields[f'{question.code} {brand.title}'].widget.attrs['readonly'] = "readonly"
+                    self.fields[f'{question.code}-{counter}'].widget.attrs['readonly'] = "readonly"
         elif question.code == 'A11':
             priority_choices = (('', ''),
                                 (1, 'اول'),
                                 (2, 'دوم'),
                                 (2, 'سوم'),)
+            counter = 0
             for brand in brands:
-                self.fields[f'{question.code} {brand.title}'] = forms.ChoiceField(label=brand.title,
-                                                                                  choices=priority_choices)
+                counter += 1
+                self.fields[f'{question.code}-{counter}'] = forms.ChoiceField(label=brand.title,
+                                                                                  choices=priority_choices,
+                                                                                  required=False)
+                self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
+                self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
             pass
         elif question.code == 'A12':
             temp_choices = [('', ''), ]
@@ -149,4 +158,4 @@ class Brand_form(forms.Form):
                 temp_choices.append((option.value, option.title))
             for brand in brands:
                 self.fields[f'{question.code} {brand.title}'] = forms.ChoiceField(label=brand.title,
-                                                                                  choices=temp_choices)
+                                                                                  choices=temp_choices, required=False)

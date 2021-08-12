@@ -195,6 +195,7 @@
         var A1_next_btn = $('button[type=button][value=next][name=A1]')
         var A2_next_btn = $('button[type=button][value=next][name=A2]')
         var A4_next_btn = $('button[type=button][value=next][name=A4]')
+        var A6_next_btn = $('button[type=button][value=next][name=A6]')
         A1_next_btn.click(function () {
             var checked_options = $('input[type=radio][name=A1]:checked')
             var count = checked_options.length
@@ -266,6 +267,77 @@
                 })
                 return true
             }
+        });
+        A6_next_btn.click(function () {
+            var checked_options = $('input[type=checkbox][name=A6]:checked')
+            var count = checked_options.length
+            if (count != 3) {
+                alert('لطفا فقط سه برند را انتخاب کنید')
+                return false
+            } else {
+                result = []
+                $('input[type=checkbox][name=A6]:checked').each(function () {
+                    result.push(parseInt($(this).val()))
+                });
+                //A7 clear
+                var A7_options = $('input[type=number][class=A7]')
+                A7_options.val('')
+                A7_options.prop('disabled', false)
+                //A7 set
+                $('input[type=number][class=A7]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    }
+                })
+
+                //A8 clear
+                var A8_options = $('input[type=number][class=A8]')
+                A8_options.val('')
+                A8_options.prop('disabled', false)
+                //A8 set
+                $('input[type=number][class=A8]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    }
+                })
+
+
+                //A9 clear
+                var A9_options = $('input[type=number][class=A9]')
+                A9_options.val('')
+                A9_options.prop('disabled', false)
+                //A8 set
+                $('input[type=number][class=A9]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    }
+                })
+
+
+                //A10 clear
+                var A10_options = $('input[type=number][class=A10]')
+                A10_options.val('')
+                A10_options.prop('disabled', false)
+                //A10 set
+                $('input[type=number][class=A10]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    }
+                })
+
+                //A11 clear
+                var A11_options = $('select[class=A11]')
+                A11_options.val('')
+                A11_options.prop('disabled', false)
+                //A11 set
+                $('select[class=A11]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    }
+                })
+                return true
+            }
+
         });
     </script>
 {% endblock %}
