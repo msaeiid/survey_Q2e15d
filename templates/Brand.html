@@ -4,106 +4,268 @@
 {% endblock %}
 {% block content %}
     <form method="post">
-        <div class="question 1">
+        <div class="question {{ A1.code }}">
             <h5>
                 {{ A1.code }}
                 {{ A1.title }}
             </h5>
-            <div id="option">
-                گزینه های A1
+            {{ A1_form }}
+            <div class="clearfix">
+                <button type="button" value="next" name="{{ A1.code }}"
+                        class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                    پرسش
+                    بعد
+                </button>
             </div>
         </div>
-        <div class="question hide 2">
+        <div class="question {{ A2.code }}">
             <h5>
                 {{ A2.code }}
                 {{ A2.title }}
             </h5>
             <div id="option">
-                گزینه های A2
+                {{ A2_form }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A2.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A2.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 3">
+        <div class="question {{ A4.code }}">
             <h5>
                 {{ A4.code }}
                 {{ A4.title }}
             </h5>
             <div id="option">
-                گزینه های A4
+                {{ A4_form }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A4.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A4.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 4">
+        <div class="question {{ A6.code }}">
             <h5>
                 {{ A6.code }}
                 {{ A6.title }}
             </h5>
             <div id="option">
-                گزینه های A6
+                {{ A6_form }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A6.code }}" name="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A6.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 5">
+        <div class="question {{ A7.code }}">
             <h5>
                 {{ A7.code }}
                 {{ A7.title }}
             </h5>
             <div id="option">
-                گزینه های A7
+                {{ A7_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A7.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A7.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 6">
+        <div class="question {{ A8.code }}">
             <h5>
                 {{ A8.code }}
                 {{ A8.title }}
             </h5>
             <div id="option">
-                گزینه های A8
+                {{ A8_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A8.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A8.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 7">
+        <div class="question {{ A9.code }}">
             <h5>
                 {{ A9.code }}
                 {{ A9.title }}
             </h5>
             <div id="option">
-                گزینه های A9
+                {{ A9_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A9.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A9.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 8">
+        <div class="question {{ A10.code }}">
             <h5>
                 {{ A10.code }}
                 {{ A10.title }}
             </h5>
             <div id="option">
-                گزینه های A10
+                {{ A10_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A10.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A10.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 9">
+        <div class="question {{ A11.code }}">
             <h5>
                 {{ A11.code }}
                 {{ A11.title }}
             </h5>
             <div id="option">
-                گزینه های A11
+                {{ A11_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A11.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A11.code }}" value="next"
+                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                        بعد
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="question hide 10">
+        <div class="question {{ A12.code }}">
             <h5>
                 {{ A12.code }}
                 {{ A12.title }}
             </h5>
             <div id="option">
-                گزینه های A12
+                {{ A12_form.as_p }}
+                <div class="clearfix">
+                    <button type="button" name="{{ A12.code }}" value="previous"
+                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        پرسش قبل
+                    </button>
+                </div>
             </div>
         </div>
         <div class="clearfix">
-            <button type="button" name="previous" class="float-right btn btn-primary col-lg-3 col-md-3 col-sm-3 col-12">
-                پرسش قبل
-            </button>
-            <button type="submit" class="btn btn-success col-lg-3 col-md-3 col-sm-3 col-12">ثبت</button>
-            <button type="button" name="next" class="float-left btn btn-primary col-lg-3 col-md-3 col-sm-3 col-12">پرسش
-                بعد
-            </button>
+            <button type="submit" class="float-none btn btn-success col-lg-3 col-md-3 col-sm-3 col-12">ثبت</button>
         </div>
     </form>
 {% endblock %}
-{% block exta_header %}
+{% block js %}
+    <script>
+        var A1_next_btn = $('button[type=button][value=next][name=A1]')
+        var A2_next_btn = $('button[type=button][value=next][name=A2]')
+        var A4_next_btn = $('button[type=button][value=next][name=A4]')
+        A1_next_btn.click(function () {
+            var checked_options = $('input[type=radio][name=A1]:checked')
+            var count = checked_options.length
+            if (count === 0) {
+                alert('لطفا یک برند را انتخاب کنید')
+                return false
+            } else {
+                var A2_options = $('input[type=checkbox][name=A2]')
+                A2_options.prop('disabled', false)
+                A2_options.prop('checked', false)
+                $('.A2 label').removeClass('text-success')
+                $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('disabled', 'true')
+                var id = $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('id')
+                $('label[for=' + id + ']').addClass('text-success')
+                //$('label[for='++']')
+                return true
+            }
+        });
+        A2_next_btn.click(function () {
+            var checked_options = $('input[type=checkbox][name=A2]:checked')
+            var count = checked_options.length
+            if (count < 2) {
+                alert('لطفا حداقل دو برند را انتخاب کنید')
+                return false
+            } else {
+                var A4_options = $('input[type=checkbox][name=A4]')
+                A4_options.prop('disabled', false)
+                A4_options.prop('checked', false)
+                $('.A4 label').removeClass('text-muted')
+
+                result = []
+                $('input[type=checkbox][name=A2]:checked').each(function () {
+                    result.push(parseInt($(this).val()))
+                });
+                result.push(parseInt($('input[type=radio][name=A1]:checked').val()))
+                $('input[type=checkbox][name=A4]').each(function () {
+                    if (!result.includes(parseInt($(this).val()))) {
+                        $('input[type=checkbox][name=A4][value=' + $(this).val() + ']').attr('disabled', 'true')
+                        var id = $('input[type=checkbox][name=A4][value=' + $(this).val() + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    }
+                })
+                return true
+            }
+        });
+        A4_next_btn.click(function () {
+            var checked_options = $('input[type=checkbox][name=A4]:checked')
+            var count = checked_options.length
+            if (count < 3) {
+                alert('لطفا حداقل سه برند را انتخاب کنید')
+                return false
+            } else {
+                var A6_options = $('input[type=checkbox][name=A6]')
+                A6_options.prop('disabled', false)
+                A6_options.prop('checked', false)
+                $('.A6 label').removeClass('text-muted')
+
+
+                result = []
+                $('input[type=checkbox][name=A4]:checked').each(function () {
+                    result.push(parseInt($(this).val()))
+                });
+                $('input[type=checkbox][name=A6]').each(function () {
+                    if (!result.includes(parseInt($(this).val()))) {
+                        $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('disabled', 'true')
+                        var id = $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    }
+                })
+                return true
+            }
+        });
+    </script>
 {% endblock %}

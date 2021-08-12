@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView
-from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form
+from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form, Brand_form
 from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child
 from django.contrib import messages
 
@@ -260,8 +260,27 @@ def Brand(request):
     A11 = Question.objects.get(code='A11')
     A12 = Question.objects.get(code='A12')
     if request.method == 'GET':
-        context = {'A1': A1, 'A2': A2, 'A4': A4, 'A6': A6, 'A7': A7, 'A8': A8, 'A9': A9, 'A10': A10, 'A11': A11,
-                   'A12': A12}
+        A1_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A1})
+        A2_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A2})
+        A4_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A4})
+        A6_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A6})
+        A7_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A7})
+        A8_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A8})
+        A9_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A9})
+        A10_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A10})
+        A11_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A11})
+        A12_form = Brand_form(request.GET, instance={'brands': A1.options.all(), 'question': A12})
+        context = {'A1': A1, 'A1_form': A1_form,
+                   'A2': A2, 'A2_form': A2_form,
+                   'A4': A4, 'A4_form': A4_form,
+                   'A6': A6, 'A6_form': A6_form,
+                   'A7': A7, 'A7_form': A7_form,
+                   'A8': A8, 'A8_form': A8_form,
+                   'A9': A9, 'A9_form': A9_form,
+                   'A10': A10, 'A10_form': A10_form,
+                   'A11': A11, 'A11_form': A11_form,
+                   'A12': A12, 'A12_form': A12_form,
+                   }
         return render(request, '../templates/Brand.html', context=context)
     else:
         pass

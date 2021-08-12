@@ -3,8 +3,7 @@ from django.forms import ModelForm
 from django import forms
 from jalali_date.fields import JalaliDateField
 from jalali_date.widgets import AdminJalaliDateWidget
-
-from Agah.models import Responder, AnswerSheet, Interviewer, Question
+from Agah.models import Responder, AnswerSheet, Interviewer
 
 
 class Responder_form(ModelForm):
@@ -106,3 +105,48 @@ class Question_form(forms.Form):
         self.fields['third_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False,
                                                               disabled=True)
         self.fields['third_child_age'] = forms.IntegerField(label='سن', required=False, disabled=True)
+
+
+class Brand_form(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(Brand_form, self).__init__()
+        brands = kwargs.get('instance').get('brands')
+        question = kwargs.get('instance').get('question')
+        brands_lst = []
+        for brand in brands:
+            brands_lst.append((brand.value, brand.title))
+        brands_lst = tuple(brands_lst)
+        if question.code == 'A1':
+            self.fields['A1'] = forms.MultipleChoiceField(label='', choices=brands_lst, widget=forms.RadioSelect,
+                                                          required=True)
+        elif question.code == 'A2':
+            self.fields['A2'] = forms.MultipleChoiceField(label='', choices=brands_lst,
+                                                          widget=forms.CheckboxSelectMultiple, required=True)
+        elif question.code == 'A4':
+            self.fields['A4'] = forms.MultipleChoiceField(label='', choices=brands_lst,
+                                                          widget=forms.CheckboxSelectMultiple, required=True)
+        elif question.code == 'A6':
+            self.fields['A6'] = forms.MultipleChoiceField(label='', choices=brands_lst,
+                                                          widget=forms.CheckboxSelectMultiple, required=True)
+        elif question.code == 'A7' or question.code == 'A8' or question.code == 'A9' or question.code == 'A10':
+            for brand in brands:
+                self.fields[f'{question.code} {brand.title}'] = forms.IntegerField(label='')
+                self.fields[f'{question.code} {brand.title}'].widget.attrs['placeholder'] = brand.title
+                if question.code == 'A8':
+                    self.fields[f'{question.code} {brand.title}'].widget.attrs['readonly'] = "readonly"
+        elif question.code == 'A11':
+            priority_choices = (('', ''),
+                                (1, 'اول'),
+                                (2, 'دوم'),
+                                (2, 'سوم'),)
+            for brand in brands:
+                self.fields[f'{question.code} {brand.title}'] = forms.ChoiceField(label=brand.title,
+                                                                                  choices=priority_choices)
+            pass
+        elif question.code == 'A12':
+            temp_choices = [('', ''), ]
+            for option in question.options.all():
+                temp_choices.append((option.value, option.title))
+            for brand in brands:
+                self.fields[f'{question.code} {brand.title}'] = forms.ChoiceField(label=brand.title,
+                                                                                  choices=temp_choices)
