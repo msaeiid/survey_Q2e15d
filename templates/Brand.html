@@ -248,12 +248,13 @@
                 alert('لطفا حداقل سه برند را انتخاب کنید')
                 return false
             } else {
+                //clear A6
                 var A6_options = $('input[type=checkbox][name=A6]')
                 A6_options.prop('disabled', false)
                 A6_options.prop('checked', false)
                 $('.A6 label').removeClass('text-muted')
 
-
+                //setA6
                 result = []
                 $('input[type=checkbox][name=A4]:checked').each(function () {
                     result.push(parseInt($(this).val()))
@@ -263,6 +264,18 @@
                         $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('disabled', 'true')
                         var id = $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('id')
                         $('label[for=' + id + ']').addClass('text-muted')
+                    }
+                })
+
+                //clear A12
+                var A12_options = $('select[class=A12]')
+                A12_options.val('')
+                A12_options.prop('disabled', false)
+
+                //setA12
+                $('select[class=A12]').each(function () {
+                    if (!result.includes(parseInt($(this).attr('brand')))) {
+                        $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true')
                     }
                 })
                 return true

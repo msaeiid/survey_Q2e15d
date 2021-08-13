@@ -132,8 +132,8 @@ class Brand_form(forms.Form):
             counter = 0
             for brand in brands:
                 counter += 1
-                self.fields[f'{question.code}-{counter}'] = forms.IntegerField(label='', required=False)
-                self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
+                self.fields[f'{question.code}-{counter}'] = forms.IntegerField(label=brand.title, required=False)
+                #self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 if question.code == 'A8':
@@ -147,8 +147,8 @@ class Brand_form(forms.Form):
             for brand in brands:
                 counter += 1
                 self.fields[f'{question.code}-{counter}'] = forms.ChoiceField(label=brand.title,
-                                                                                  choices=priority_choices,
-                                                                                  required=False)
+                                                                              choices=priority_choices,
+                                                                              required=False)
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
             pass
@@ -156,6 +156,9 @@ class Brand_form(forms.Form):
             temp_choices = [('', ''), ]
             for option in question.options.all():
                 temp_choices.append((option.value, option.title))
+            counter = 0
             for brand in brands:
-                self.fields[f'{question.code} {brand.title}'] = forms.ChoiceField(label=brand.title,
-                                                                                  choices=temp_choices, required=False)
+                counter += 1
+                self.fields[f'{question.code}-{counter}'] = forms.ChoiceField(label=brand.title,choices=temp_choices, required=False)
+                self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
+                self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
