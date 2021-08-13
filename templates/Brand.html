@@ -196,6 +196,8 @@
         var A2_next_btn = $('button[type=button][value=next][name=A2]')
         var A4_next_btn = $('button[type=button][value=next][name=A4]')
         var A6_next_btn = $('button[type=button][value=next][name=A6]')
+        var A7_next_btn = $('button[type=button][value=next][name=A7]')
+        var A8_next_btn = $('button[type=button][value=next][name=A8]')
         A1_next_btn.click(function () {
             var checked_options = $('input[type=radio][name=A1]:checked')
             var count = checked_options.length
@@ -287,7 +289,8 @@
             if (count != 3) {
                 alert('لطفا فقط سه برند را انتخاب کنید')
                 return false
-            } else {
+            }
+            else {
                 result = []
                 $('input[type=checkbox][name=A6]:checked').each(function () {
                     result.push(parseInt($(this).val()))
@@ -300,6 +303,8 @@
                 $('input[type=number][class=A7]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                    } else {
+                        $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').prop('min', 0)
                     }
                 })
 
@@ -352,5 +357,49 @@
             }
 
         });
+        A7_next_btn.click(function () {
+            var enable_input_A7 = $('input[type=number][class=A7]:enabled')
+            //validation
+            error = []
+            sum = 0
+            for (var i = 0; i < 3; i++) {
+                if (enable_input_A7[i].value === '') {
+                    error.push('مقدار برند '
+                        + enable_input_A7[i].getAttribute('brand') +
+                        ' خالی است.' +
+                        '\n'
+                    )
+                } else {
+                    sum += parseInt(enable_input_A7[i].value)
+                }
+                if (parseInt(enable_input_A7[i].value) < parseInt(enable_input_A7[i].min)) {
+                    error.push('مقدار برند '
+                        + enable_input_A7[i].getAttribute('brand') +
+                        'کمتر از ' +
+                        enable_input_A7[i].min +
+                        ' است.' +
+                        '\n'
+                    )
+                }
+            }
+            //desicion making
+            if (error.length > 0) {
+                alert(error)
+            } else {
+                var enable_input_A8 = $('input[type=number][class=A8]:enabled')
+                var enable_input_A9 = $('input[type=number][class=A9]:enabled')
+                for (var i = 0; i < 3; i++) {
+                    var temp = parseInt(enable_input_A7[i].value) / sum * 100
+                    enable_input_A8[i].value = temp.toFixed(1)
+                    enable_input_A9[i].max = parseInt(enable_input_A7[i].value)
+                    enable_input_A9[i].min = 0
+                }
+            return true
+            }
+        });
+        A8_next_btn.click(function (){
+            console.log('next pageeeee')
+            return true
+        })
     </script>
 {% endblock %}
