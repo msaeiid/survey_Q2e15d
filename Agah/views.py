@@ -248,6 +248,7 @@ def Social(request):
         return redirect(reverse('agah:brand'))
 
 
+@csrf_protect
 def Brand(request):
     A1 = Question.objects.get(code='A1')
     A2 = Question.objects.get(code='A2')
@@ -283,4 +284,5 @@ def Brand(request):
                    }
         return render(request, '../templates/Brand.html', context=context)
     else:
+        print('')
         pass

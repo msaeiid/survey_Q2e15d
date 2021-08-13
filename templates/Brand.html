@@ -4,6 +4,7 @@
 {% endblock %}
 {% block content %}
     <form method="post">
+        {% csrf_token %}
         <div class="question {{ A1.code }}">
             <h5>
                 {{ A1.code }}
@@ -12,7 +13,7 @@
             {{ A1_form }}
             <div class="clearfix">
                 <button type="button" value="next" name="{{ A1.code }}"
-                        class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                        class="float-left btn btn-primary">
                     پرسش
                     بعد
                 </button>
@@ -27,11 +28,11 @@
                 {{ A2_form }}
                 <div class="clearfix">
                     <button type="button" name="{{ A2.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A2.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -46,11 +47,11 @@
                 {{ A4_form }}
                 <div class="clearfix">
                     <button type="button" name="{{ A4.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A4.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -65,11 +66,11 @@
                 {{ A6_form }}
                 <div class="clearfix">
                     <button type="button" name="{{ A6.code }}" name="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A6.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -84,11 +85,11 @@
                 {{ A7_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A7.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A7.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -103,11 +104,11 @@
                 {{ A8_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A8.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A8.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -122,11 +123,11 @@
                 {{ A9_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A9.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A9.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -141,11 +142,11 @@
                 {{ A10_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A10.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A10.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -160,11 +161,11 @@
                 {{ A11_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A11.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
                     <button type="button" name="{{ A11.code }}" value="next"
-                            class="float-left btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">پرسش
+                            class="float-left btn btn-primary">پرسش
                         بعد
                     </button>
                 </div>
@@ -179,19 +180,18 @@
                 {{ A12_form.as_p }}
                 <div class="clearfix">
                     <button type="button" name="{{ A12.code }}" value="previous"
-                            class="float-right btn btn-primary col-lg-5 col-md-5 col-sm-11 col-11">
+                            class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
+                    <button type="submit" class="float-left btn btn-success col-lg-4 col-md-4 col-sm-6 col-6">مرحله بعد</button>
                 </div>
             </div>
-        </div>
-        <div class="clearfix">
-            <button type="submit" class="float-none btn btn-success col-lg-3 col-md-3 col-sm-3 col-12">ثبت</button>
         </div>
     </form>
 {% endblock %}
 {% block js %}
     <script>
+        $('button').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
         var A1_next_btn = $('button[type=button][value=next][name=A1]')
         var A2_next_btn = $('button[type=button][value=next][name=A2]')
         var A4_next_btn = $('button[type=button][value=next][name=A4]')
@@ -201,6 +201,7 @@
         var A9_next_btn = $('button[type=button][value=next][name=A9]')
         var A10_next_btn = $('button[type=button][value=next][name=A10]')
         var A11_next_btn = $('button[type=button][value=next][name=A11]')
+        var frm = $('form')
         A1_next_btn.click(function () {
             var checked_options = $('input[type=radio][name=A1]:checked')
             var count = checked_options.length
@@ -487,11 +488,39 @@
             if (error.length > 0) {
                 alert(error)
                 return false
-            }
-            else {
+            } else {
                 console.log('next page A11 send')
                 return true
             }
         });
+        frm.submit(function () {
+            var enabled_select_A12 = $('select[class=A12]:enabled')
+            //validation
+            var error = []
+            for (var i = 0; i < enabled_select_A12.length; i++) {
+                if (enabled_select_A12[i].value === '') {
+                    error.push('برای برند' +
+                        enabled_select_A12[i].getAttribute('brand') +
+                        'مقداری انتخاب نشده است.' +
+                        '\n'
+                    )
+                }
+            }
+            if (error.length > 0) {
+                alert(error)
+                return false
+            } else {
+                console.log('next page A12 send')
+                return true
+            }
+        });
+
     </script>
+{% endblock %}
+{% block exta_header %}
+    <style>
+        button {
+            margin-bottom: 10px;
+        }
+    </style>
 {% endblock %}
