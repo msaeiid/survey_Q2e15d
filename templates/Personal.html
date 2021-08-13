@@ -190,63 +190,6 @@
                 $('#id_city').removeClass('is-valid')
             }
         });
-        {% comment %}$(document).ready(function () {
-            if ($('input[name=date]').value !== undefined) {
-                if ($('input[name=date]').value.length == 10) {
-                    date.removeClass('is-invalid')
-                    date.addClass('is-valid')
-                }
-            } else {
-                date.addClass('is-invalid')
-                date.removeClass('is-valid')
-            }
-            if ($('#id_firstname').value !== undefined) {
-                if ($('#id_firstname').value.length >= 1) {
-                    firstname.removeClass('is-invalid')
-                    firstname.addClass('is-valid')
-                }
-            } else {
-                firstname.addClass('is-invalid')
-                firstname.removeClass('is-valid')
-            }
-            if ($('#id_lastname').value !== undefined) {
-                if ($('#id_lastname').value.length >= 1) {
-                    lastname.removeClass('is-invalid')
-                    lastname.addClass('is-valid')
-                }
-            } else {
-                lastname.addClass('is-invalid')
-                lastname.removeClass('is-valid')
-            }
-            if ($('#id_mobile').value !== undefined) {
-                var mobile_regex = new RegExp('^09[0-9]{9}$');
-                if ($('#id_mobile').value.match(mobile_regex)) {
-                    mobile.removeClass('is-invalid')
-                    mobile.addClass('is-valid')
-                }
-            } else {
-                mobile.addClass('is-invalid')
-                mobile.removeClass('is-valid')
-            }
-            if ($('#id_code').value !== undefined) {
-                if ($('#id_code').value.length == 5) {
-                    code.removeClass('is-invalid')
-                    code.addClass('is-valid')
-                }
-            } else {
-                code.addClass('is-invalid')
-                code.removeClass('is-valid')
-            }
-            if ($('#id_city').value !== undefined) {
-                if ($('#id_city').value !== '') {
-                    city.removeClass('is-invalid')
-                    city.addClass('is-valid')
-                }
-            } else {
-                city.addClass('is-invalid')
-                city.removeClass('is-valid')
-            }
-        });{% endcomment %}
         $('form').submit(function () {
             console.log('submit')
         });

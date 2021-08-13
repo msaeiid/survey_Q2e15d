@@ -17,9 +17,13 @@
                     پرسش
                     بعد
                 </button>
+                <button disabled type="button" name="{{ A2.code }}" value="previous"
+                        class="float-right btn btn-primary">
+                    پرسش قبل
+                </button>
             </div>
         </div>
-        <div class="question {{ A2.code }}">
+        <div class="question {{ A2.code }} ">
             <h5>
                 {{ A2.code }}
                 {{ A2.title }}
@@ -38,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A4.code }}">
+        <div class="question {{ A4.code }} ">
             <h5>
                 {{ A4.code }}
                 {{ A4.title }}
@@ -57,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A6.code }}">
+        <div class="question {{ A6.code }} ">
             <h5>
                 {{ A6.code }}
                 {{ A6.title }}
@@ -76,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A7.code }}">
+        <div class="question {{ A7.code }} ">
             <h5>
                 {{ A7.code }}
                 {{ A7.title }}
@@ -95,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A8.code }}">
+        <div class="question {{ A8.code }} ">
             <h5>
                 {{ A8.code }}
                 {{ A8.title }}
@@ -114,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A9.code }}">
+        <div class="question {{ A9.code }} ">
             <h5>
                 {{ A9.code }}
                 {{ A9.title }}
@@ -133,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A10.code }}">
+        <div class="question {{ A10.code }} ">
             <h5>
                 {{ A10.code }}
                 {{ A10.title }}
@@ -152,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A11.code }}">
+        <div class="question {{ A11.code }} ">
             <h5>
                 {{ A11.code }}
                 {{ A11.title }}
@@ -171,7 +175,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A12.code }}">
+        <div class="question {{ A12.code }} ">
             <h5>
                 {{ A12.code }}
                 {{ A12.title }}
@@ -183,7 +187,9 @@
                             class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
-                    <button type="submit" class="float-left btn btn-success col-lg-4 col-md-4 col-sm-6 col-6">مرحله بعد</button>
+                    <button type="submit" class="float-left btn btn-success">مرحله
+                        بعد
+                    </button>
                 </div>
             </div>
         </div>
@@ -191,7 +197,9 @@
 {% endblock %}
 {% block js %}
     <script>
-        $('button').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
+        //$('button').addClass('col-lg-5 col-md-5 col-sm-5 col-5')
+        //$('input[type=number]').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
+        //$('select').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
         var A1_next_btn = $('button[type=button][value=next][name=A1]')
         var A2_next_btn = $('button[type=button][value=next][name=A2]')
         var A4_next_btn = $('button[type=button][value=next][name=A4]')
@@ -216,7 +224,8 @@
                 $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('disabled', 'true')
                 var id = $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('id')
                 $('label[for=' + id + ']').addClass('text-success')
-                //$('label[for='++']')
+                $('div .A1').addClass('hide')
+                $('div .A2').removeClass('hide')
                 return true
             }
         });
@@ -244,6 +253,8 @@
                         $('label[for=' + id + ']').addClass('text-muted')
                     }
                 })
+                $('div .A2').addClass('hide')
+                $('div .A4').removeClass('hide')
                 return true
             }
         });
@@ -284,6 +295,8 @@
                         $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true')
                     }
                 })
+                $('div .A4').addClass('hide')
+                $('div .A6').removeClass('hide')
                 return true
             }
         });
@@ -354,6 +367,8 @@
                         $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true')
                     }
                 })
+                $('div .A6').addClass('hide')
+                $('div .A7').removeClass('hide')
                 return true
             }
 
@@ -395,11 +410,14 @@
                     enable_input_A8[i].value = temp.toFixed(1)
                     enable_input_A9[i].max = parseInt(enable_input_A7[i].value)
                 }
+                $('div .A7').addClass('hide')
+                $('div .A8').removeClass('hide')
                 return true
             }
         });
         A8_next_btn.click(function () {
-            console.log('next page A8 send')
+            $('div .A8').addClass('hide')
+            $('div .A9').removeClass('hide')
             return true
         });
         A9_next_btn.click(function () {
@@ -434,7 +452,8 @@
                 alert(error)
                 return false
             } else {
-                console.log('next page A9 send')
+                $('div .A9').addClass('hide')
+                $('div .A10').removeClass('hide')
                 return true
             }
 
@@ -465,7 +484,8 @@
                 alert(error)
                 return false
             } else {
-                console.log('next page A10 send')
+                $('div .A10').addClass('hide')
+                $('div .A11').removeClass('hide')
                 return true
             }
         });
@@ -489,7 +509,8 @@
                 alert(error)
                 return false
             } else {
-                console.log('next page A11 send')
+                $('div .A11').addClass('hide')
+                $('div .A12').removeClass('hide')
                 return true
             }
         });
@@ -510,17 +531,16 @@
                 alert(error)
                 return false
             } else {
-                console.log('next page A12 send')
+                $('div .A12').addClass('hide')
                 return true
             }
         });
-
     </script>
 {% endblock %}
 {% block exta_header %}
     <style>
         button {
-            margin-bottom: 10px;
+            margin: 10px;
         }
     </style>
 {% endblock %}
