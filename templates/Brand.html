@@ -198,6 +198,9 @@
         var A6_next_btn = $('button[type=button][value=next][name=A6]')
         var A7_next_btn = $('button[type=button][value=next][name=A7]')
         var A8_next_btn = $('button[type=button][value=next][name=A8]')
+        var A9_next_btn = $('button[type=button][value=next][name=A9]')
+        var A10_next_btn = $('button[type=button][value=next][name=A10]')
+        var A11_next_btn = $('button[type=button][value=next][name=A11]')
         A1_next_btn.click(function () {
             var checked_options = $('input[type=radio][name=A1]:checked')
             var count = checked_options.length
@@ -289,8 +292,7 @@
             if (count != 3) {
                 alert('لطفا فقط سه برند را انتخاب کنید')
                 return false
-            }
-            else {
+            } else {
                 result = []
                 $('input[type=checkbox][name=A6]:checked').each(function () {
                     result.push(parseInt($(this).val()))
@@ -303,8 +305,6 @@
                 $('input[type=number][class=A7]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true')
-                    } else {
-                        $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').prop('min', 0)
                     }
                 })
 
@@ -360,8 +360,8 @@
         A7_next_btn.click(function () {
             var enable_input_A7 = $('input[type=number][class=A7]:enabled')
             //validation
-            error = []
-            sum = 0
+            var error = []
+            var sum = 0
             for (var i = 0; i < 3; i++) {
                 if (enable_input_A7[i].value === '') {
                     error.push('مقدار برند '
@@ -375,16 +375,17 @@
                 if (parseInt(enable_input_A7[i].value) < parseInt(enable_input_A7[i].min)) {
                     error.push('مقدار برند '
                         + enable_input_A7[i].getAttribute('brand') +
-                        'کمتر از ' +
+                        ' کمتر از ' +
                         enable_input_A7[i].min +
                         ' است.' +
                         '\n'
                     )
                 }
             }
-            //desicion making
+            //decision making
             if (error.length > 0) {
                 alert(error)
+                return false
             } else {
                 var enable_input_A8 = $('input[type=number][class=A8]:enabled')
                 var enable_input_A9 = $('input[type=number][class=A9]:enabled')
@@ -392,14 +393,105 @@
                     var temp = parseInt(enable_input_A7[i].value) / sum * 100
                     enable_input_A8[i].value = temp.toFixed(1)
                     enable_input_A9[i].max = parseInt(enable_input_A7[i].value)
-                    enable_input_A9[i].min = 0
                 }
-            return true
+                return true
             }
         });
-        A8_next_btn.click(function (){
-            console.log('next pageeeee')
+        A8_next_btn.click(function () {
+            console.log('next page A8 send')
             return true
-        })
+        });
+        A9_next_btn.click(function () {
+            var enabled_input_A9 = $('input[type=number][class=A9]:enabled')
+            //validation
+            var error = []
+            for (var i = 0; i < 3; i++) {
+                if (enabled_input_A9[i].value === '') {
+                    error.push('مقداری برای برند ' +
+                        enabled_input_A9[i].getAttribute('brand') +
+                        ' وارد نشده است' +
+                        '\n'
+                    )
+                } else if (parseInt(enabled_input_A9[i].value) > parseInt(enabled_input_A9[i].max)) {
+                    error.push('مقدار وارد شد برای برند ' +
+                        enabled_input_A9[i].getAttribute('brand') +
+                        ' بیش از مقدار خریداری شده در یک ماه اخیر است' +
+                        '\n'
+                    )
+                } else if (parseInt(enabled_input_A9[i].value) < parseInt(enabled_input_A9[i].min)) {
+                    error.push('مقدار وارد شد برای برند ' +
+                        enabled_input_A9[i].getAttribute('brand') +
+                        ' کمتر از ' +
+                        enabled_input_A9[i].getAttribute('min') +
+                        ' است' +
+                        '\n'
+                    )
+                }
+            }
+            //decision making
+            if (error.length > 0) {
+                alert(error)
+                return false
+            } else {
+                console.log('next page A9 send')
+                return true
+            }
+
+        });
+        A10_next_btn.click(function () {
+            var enabled_input_A10 = $('input[type=number][class=A10]:enabled')
+            var error = []
+            //validation
+            for (var i = 0; i < 3; i++) {
+                if (enabled_input_A10[i].value === '') {
+                    error.push('مبلغی برای برند ' +
+                        enabled_input_A10[i].getAttribute('brand') +
+                        ' وارد نشده است' +
+                        '\n'
+                    )
+                } else if (parseInt(enabled_input_A10[i].value) < parseInt(enabled_input_A10[i].min)) {
+                    error.push('مبلغ وارد شده برای برند ' +
+                        enabled_input_A10[i].getAttribute('brand') +
+                        ' کمتر از ' +
+                        enabled_input_A10[i].getAttribute('min') +
+                        ' است.' +
+                        '\n'
+                    )
+                }
+            }
+            //decision making
+            if (error.length > 0) {
+                alert(error)
+                return false
+            } else {
+                console.log('next page A10 send')
+                return true
+            }
+        });
+        A11_next_btn.click(function () {
+            var enabled_select_A11 = $('select[class=A11]:enabled')
+            //validation
+            var error = []
+            if (enabled_select_A11[0].value === '' || enabled_select_A11[1].value === '' || enabled_select_A11[2].value === '') {
+                error.push('لطفا  تمام فیلدهای مشخص شده را انتخاب نمایید.' +
+                    '\n'
+                )
+            } else if ((parseInt(enabled_select_A11[0].value) === parseInt(enabled_select_A11[1].value)) ||
+                (parseInt(enabled_select_A11[0].value) === parseInt(enabled_select_A11[2].value)) ||
+                (parseInt(enabled_select_A11[1].value) === parseInt(enabled_select_A11[2].value))) {
+                error.push('لطفا از متفاوت بودن اولویت ها مطمئن شوید' +
+                    '\n'
+                )
+            }
+            //decision making
+            if (error.length > 0) {
+                alert(error)
+                return false
+            }
+            else {
+                console.log('next page A11 send')
+                return true
+            }
+        });
     </script>
 {% endblock %}

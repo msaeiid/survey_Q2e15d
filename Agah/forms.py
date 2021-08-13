@@ -136,13 +136,14 @@ class Brand_form(forms.Form):
                 #self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
+                self.fields[f'{question.code}-{counter}'].widget.attrs['min'] = 0
                 if question.code == 'A8':
                     self.fields[f'{question.code}-{counter}'].widget.attrs['readonly'] = "readonly"
         elif question.code == 'A11':
             priority_choices = (('', ''),
                                 (1, 'اول'),
                                 (2, 'دوم'),
-                                (2, 'سوم'),)
+                                (3, 'سوم'),)
             counter = 0
             for brand in brands:
                 counter += 1
