@@ -23,7 +23,7 @@
                 </button>
             </div>
         </div>
-        <div class="question {{ A2.code }} ">
+        <div class="question hide {{ A2.code }} ">
             <h5>
                 {{ A2.code }}
                 {{ A2.title }}
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A4.code }} ">
+        <div class="question hide {{ A4.code }} ">
             <h5>
                 {{ A4.code }}
                 {{ A4.title }}
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A6.code }} ">
+        <div class="question hide {{ A6.code }} ">
             <h5>
                 {{ A6.code }}
                 {{ A6.title }}
@@ -69,7 +69,7 @@
             <div id="option">
                 {{ A6_form }}
                 <div class="clearfix">
-                    <button type="button" name="{{ A6.code }}" name="previous"
+                    <button type="button" name="{{ A6.code }}" value="previous"
                             class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A7.code }} ">
+        <div class="question hide {{ A7.code }} ">
             <h5>
                 {{ A7.code }}
                 {{ A7.title }}
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A8.code }} ">
+        <div class="question hide {{ A8.code }} ">
             <h5>
                 {{ A8.code }}
                 {{ A8.title }}
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A9.code }} ">
+        <div class="question hide {{ A9.code }} ">
             <h5>
                 {{ A9.code }}
                 {{ A9.title }}
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A10.code }} ">
+        <div class="question hide {{ A10.code }} ">
             <h5>
                 {{ A10.code }}
                 {{ A10.title }}
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A11.code }} ">
+        <div class="question hide {{ A11.code }} ">
             <h5>
                 {{ A11.code }}
                 {{ A11.title }}
@@ -175,7 +175,7 @@
                 </div>
             </div>
         </div>
-        <div class="question {{ A12.code }} ">
+        <div class="question hide {{ A12.code }} ">
             <h5>
                 {{ A12.code }}
                 {{ A12.title }}
@@ -200,6 +200,7 @@
         $('button').addClass('col-lg-5 col-md-5 col-sm-5 col-5')
         //$('input[type=number]').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
         //$('select').addClass('col-lg-5 col-md-5 col-sm-12 col-12')
+        //next
         var A1_next_btn = $('button[type=button][value=next][name=A1]')
         var A2_next_btn = $('button[type=button][value=next][name=A2]')
         var A4_next_btn = $('button[type=button][value=next][name=A4]')
@@ -209,7 +210,18 @@
         var A9_next_btn = $('button[type=button][value=next][name=A9]')
         var A10_next_btn = $('button[type=button][value=next][name=A10]')
         var A11_next_btn = $('button[type=button][value=next][name=A11]')
+        //pre
+        var A2_pre_btn = $('button[type=button][value=previous][name=A2]')
+        var A4_pre_btn = $('button[type=button][value=previous][name=A4]')
+        var A6_pre_btn = $('button[type=button][value=previous][name=A6]')
+        var A7_pre_btn = $('button[type=button][value=previous][name=A7]')
+        var A8_pre_btn = $('button[type=button][value=previous][name=A8]')
+        var A9_pre_btn = $('button[type=button][value=previous][name=A9]')
+        var A10_pre_btn = $('button[type=button][value=previous][name=A10]')
+        var A11_pre_btn = $('button[type=button][value=previous][name=A11]')
+        var A12_pre_btn = $('button[type=button][value=previous][name=A12]')
         var frm = $('form')
+
         A1_next_btn.click(function () {
             var checked_options = $('input[type=radio][name=A1]:checked')
             var count = checked_options.length
@@ -520,9 +532,9 @@
             var error = []
             for (var i = 0; i < enabled_select_A12.length; i++) {
                 if (enabled_select_A12[i].value === '') {
-                    error.push('برای برند' +
+                    error.push('برای برند ' +
                         enabled_select_A12[i].getAttribute('brand') +
-                        'مقداری انتخاب نشده است.' +
+                        ' مقداری انتخاب نشده است.' +
                         '\n'
                     )
                 }
@@ -534,6 +546,44 @@
                 $('div .A12').addClass('hide')
                 return true
             }
+        });
+
+        A2_pre_btn.click(function () {
+            console.log('heynfnfonofi')
+            $('div .A2').addClass('hide')
+            $('div .A1').removeClass('hide')
+        });
+        A4_pre_btn.click(function () {
+            $('div .A4').addClass('hide')
+            $('div .A2').removeClass('hide')
+        });
+        A6_pre_btn.click(function () {
+            $('div .A6').addClass('hide')
+            $('div .A4').removeClass('hide')
+        });
+        A7_pre_btn.click(function () {
+            $('div .A7').addClass('hide')
+            $('div .A6').removeClass('hide')
+        });
+        A8_pre_btn.click(function () {
+            $('div .A8').addClass('hide')
+            $('div .A7').removeClass('hide')
+        });
+        A9_pre_btn.click(function () {
+            $('div .A9').addClass('hide')
+            $('div .A8').removeClass('hide')
+        });
+        A10_pre_btn.click(function () {
+            $('div .A10').addClass('hide')
+            $('div .A9').removeClass('hide')
+        });
+        A11_pre_btn.click(function () {
+            $('div .A11').addClass('hide')
+            $('div .A10').removeClass('hide')
+        });
+        A12_pre_btn.click(function () {
+            $('div .A12').addClass('hide')
+            $('div .A11').removeClass('hide')
         });
     </script>
 {% endblock %}
