@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView
 from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form, Brand_form
-from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child
+from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child, Option
 from django.contrib import messages
 
 
@@ -117,7 +117,12 @@ def check_age(age):
 @csrf_protect
 def Social(request):
     answersheet = request.session.get('answersheet')
-    answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
+    try:
+        answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
+    except:
+        survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
+        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        return redirect(reverse('agah:survey', args=[survey.pk]))
     Q2 = get_object_or_404(Question, pk=request.session['question'])
     Q3 = Q2.next_question
     Q4 = Q3.next_question
@@ -143,20 +148,23 @@ def Social(request):
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
-            if not limit.check_for_capacity():
-                answersheet.delete()
-                messages.info(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
-                return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
+            if not answersheet.answers.filter(question__code='Q2').exists():
+                if not limit.check_for_capacity():
+                    answersheet.delete()
+                    messages.info(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
+                    return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
 
         # Q2 save answer...
         answer = None
         if Answer.objects.filter(question=Q2, answersheet=answersheet).exists():
             answer = Answer.objects.get(question=Q2, answersheet=answersheet)
-            answer.answer = age_category
+
+            answer.option = Q2.options.get(value=age_category)
             answer.point = Q2.options.get(value=age_category).point
         else:
-            answer = Answer(question=Q2, answersheet=answersheet, answer=age_category,
-                            point=Q2.options.get(value=age_category).point)
+            answer = Answer(question=Q2, answersheet=answersheet,
+                            point=Q2.options.get(value=age_category).point,
+                            option=Q2.options.get(value=age_category))
         answer.save()
 
         # Q3 save answer...
@@ -164,33 +172,32 @@ def Social(request):
             answer = Answer.objects.get(question=Q3, answersheet=answersheet)
             if answer.answer != marital_status:
                 Child.objects.filter(responder=answersheet.responser).delete()
-            answer.answer = marital_status
+            answer.option = Q3.options.get(value=marital_status)
             answer.point = Q3.options.get(value=marital_status).point
         else:
-            answer = Answer(question=Q3, answersheet=answersheet, answer=marital_status,
+            answer = Answer(question=Q3, answersheet=answersheet, option=Q3.options.get(value=marital_status),
                             point=Q3.options.get(value=marital_status).point)
         answer.save()
 
         # Q4 save answer...
-        number_of_child = request.POST.get('number_of_child', None)
-        if number_of_child is not None:
-            if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
-                answer = Answer.objects.get(question=Q4, answersheet=answersheet)
-                Child.objects.filter(responder=answersheet.responser).delete()
-                answer.answer = int(number_of_child)
-                answer.point = 0
-            else:
-                answer = Answer(question=Q4, answersheet=answersheet, answer=int(number_of_child), point=0)
-            answer.save()
+        number_of_child = request.POST.get('number_of_child', 0)
+        if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
+            answer = Answer.objects.get(question=Q4, answersheet=answersheet)
+            Child.objects.filter(responder=answersheet.responser).delete()
+            answer.answer = int(number_of_child)
+            answer.point = 0
+        else:
+            answer = Answer(question=Q4, answersheet=answersheet, answer=int(number_of_child), point=0)
+        answer.save()
 
         # T1 save answer...
         home = request.POST.get('home')
         if Answer.objects.filter(question=T1, answersheet=answersheet).exists():
             answer = Answer.objects.get(question=T1, answersheet=answersheet)
-            answer.answer = home
+            answer.option = T1.options.get(value=home)
             answer.point = T1.options.get(value=home).point
         else:
-            answer = Answer(question=T1, answersheet=answersheet, answer=home,
+            answer = Answer(question=T1, answersheet=answersheet, option=T1.options.get(value=home),
                             point=T1.options.get(value=home).point)
         answer.save()
 
@@ -199,9 +206,10 @@ def Social(request):
         if Answer.objects.filter(question=T2, answersheet=answersheet).exists():
             answer = Answer.objects.get(question=T2, answersheet=answersheet)
             answer.answer = job
+            answer.option = T2.options.get(value=job)
             answer.point = T2.options.get(value=job).point
         else:
-            answer = Answer(question=T2, answersheet=answersheet, answer=job,
+            answer = Answer(question=T2, answersheet=answersheet, option=T2.options.get(value=job),
                             point=T2.options.get(value=job).point)
         answer.save()
 
@@ -212,13 +220,14 @@ def Social(request):
             answer.answer = region
             answer.point = T3.regions.get(value=region, city=answersheet.responser.city).point
         else:
-            answer = Answer(question=T3, answersheet=answersheet, answer=region,
+            answer = Answer(question=T3, answersheet=answersheet,
+                            answer=region,
                             point=T3.regions.get(value=region, city=answersheet.responser.city).point)
         answer.save()
 
         # T4_1 save answer...
-        if number_of_child is not None:
-            if int(number_of_child) in [1, 2, 3]:
+        if int(number_of_child) > 0:
+            if int(number_of_child) >= 1:
                 first_child_year = int(request.POST.get('first_child_year'))
                 first_child_gender = request.POST.get('first_child_gender')
                 first_child_age = int(request.POST.get('first_child_age'))
@@ -227,7 +236,7 @@ def Social(request):
                               age=first_child_age)
                 child.save()
 
-            if int(number_of_child) in [2, 3]:
+            if int(number_of_child) >= 2:
                 second_child_year = int(request.POST.get('second_child_year'))
                 second_child_gender = request.POST.get('second_child_gender')
                 second_child_age = int(request.POST.get('second_child_age'))
@@ -250,6 +259,13 @@ def Social(request):
 
 @csrf_protect
 def Brand(request):
+    answersheet = request.session.get('answersheet')
+    try:
+        answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
+    except:
+        survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
+        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        return redirect(reverse('agah:survey', args=[survey.pk]))
     A1 = Question.objects.get(code='A1')
     A2 = Question.objects.get(code='A2')
     A4 = Question.objects.get(code='A4')
@@ -284,7 +300,7 @@ def Brand(request):
                    }
         return render(request, '../templates/Brand.html', context=context)
     else:
-        A1_answer=request.POST.get('A1')
+        A1_answer = request.POST.get('A1')
         A2_answer = request.POST.getlist('A2')
         A4_answer = request.POST.getlist('A4')
         A6_answer = request.POST.getlist('A6')
@@ -294,5 +310,5 @@ def Brand(request):
         A10_answer = [request.POST.get(item) for item in request.POST if item.startswith('A10')]
         A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
         A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
-        #todo:save if first  edit if is second
+        # todo:save if first  edit if is second
         pass

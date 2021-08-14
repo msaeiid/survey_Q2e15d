@@ -148,7 +148,7 @@ class Question(models.Model):
     type = models.CharField(max_length=50, choices=question_choices, blank=True)
 
     def __str__(self):
-        return f'{self.code}'
+        return f'{self.title}'
 
 
 class Option(models.Model):
@@ -220,8 +220,10 @@ class Answer(models.Model):
     question = models.ForeignKey(verbose_name='پرسش', to=Question, on_delete=models.PROTECT)
     answersheet = models.ForeignKey(verbose_name='پاسخنامه', to=AnswerSheet, related_name='answers',
                                     on_delete=models.CASCADE)
-    answer = models.CharField(verbose_name='پاسخ', max_length=10, default=None, null=False, blank=False)
+    answer = models.CharField(verbose_name='مقدار', max_length=10, default=None, null=True, blank=True, editable=True)
     point = models.PositiveSmallIntegerField(verbose_name='امتیاز', editable=True, null=False, blank=False, default=0)
+    option = models.ForeignKey(to=Option, verbose_name='گزینه ی انتخاب شده', editable=True, null=True, blank=True,
+                               default=None, on_delete=models.PROTECT)
 
     def __str__(self):
         return f'پاسخ سوال' \
