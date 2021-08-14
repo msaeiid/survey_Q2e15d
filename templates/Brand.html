@@ -236,8 +236,8 @@
                 $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('disabled', 'true')
                 var id = $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('id')
                 $('label[for=' + id + ']').addClass('text-success')
-                $('div .A1').addClass('hide')
-                $('div .A2').removeClass('hide')
+                $('div.A1').addClass('hide')
+                $('div.A2').removeClass('hide')
                 return true
             }
         });
@@ -265,8 +265,8 @@
                         $('label[for=' + id + ']').addClass('text-muted')
                     }
                 })
-                $('div .A2').addClass('hide')
-                $('div .A4').removeClass('hide')
+                $('div.A2').addClass('hide')
+                $('div.A4').removeClass('hide')
                 return true
             }
         });
@@ -307,8 +307,8 @@
                         $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true')
                     }
                 })
-                $('div .A4').addClass('hide')
-                $('div .A6').removeClass('hide')
+                $('div.A4').addClass('hide')
+                $('div.A6').removeClass('hide')
                 return true
             }
         });
@@ -379,8 +379,8 @@
                         $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true')
                     }
                 })
-                $('div .A6').addClass('hide')
-                $('div .A7').removeClass('hide')
+                $('div.A6').addClass('hide')
+                $('div.A7').removeClass('hide')
                 return true
             }
 
@@ -422,14 +422,14 @@
                     enable_input_A8[i].value = temp.toFixed(1)
                     enable_input_A9[i].max = parseInt(enable_input_A7[i].value)
                 }
-                $('div .A7').addClass('hide')
-                $('div .A8').removeClass('hide')
+                $('div.A7').addClass('hide')
+                $('div.A8').removeClass('hide')
                 return true
             }
         });
         A8_next_btn.click(function () {
-            $('div .A8').addClass('hide')
-            $('div .A9').removeClass('hide')
+            $('div.A8').addClass('hide')
+            $('div.A9').removeClass('hide')
             return true
         });
         A9_next_btn.click(function () {
@@ -464,8 +464,8 @@
                 alert(error)
                 return false
             } else {
-                $('div .A9').addClass('hide')
-                $('div .A10').removeClass('hide')
+                $('div.A9').addClass('hide')
+                $('div.A10').removeClass('hide')
                 return true
             }
 
@@ -496,8 +496,8 @@
                 alert(error)
                 return false
             } else {
-                $('div .A10').addClass('hide')
-                $('div .A11').removeClass('hide')
+                $('div.A10').addClass('hide')
+                $('div.A11').removeClass('hide')
                 return true
             }
         });
@@ -521,8 +521,8 @@
                 alert(error)
                 return false
             } else {
-                $('div .A11').addClass('hide')
-                $('div .A12').removeClass('hide')
+                $('div.A11').addClass('hide')
+                $('div.A12').removeClass('hide')
                 return true
             }
         });
@@ -550,40 +550,40 @@
 
         A2_pre_btn.click(function () {
             console.log('heynfnfonofi')
-            $('div .A2').addClass('hide')
-            $('div .A1').removeClass('hide')
+            $('div.A2').addClass('hide')
+            $('div.A1').removeClass('hide')
         });
         A4_pre_btn.click(function () {
-            $('div .A4').addClass('hide')
-            $('div .A2').removeClass('hide')
+            $('div.A4').addClass('hide')
+            $('div.A2').removeClass('hide')
         });
         A6_pre_btn.click(function () {
-            $('div .A6').addClass('hide')
-            $('div .A4').removeClass('hide')
+            $('div.A6').addClass('hide')
+            $('div.A4').removeClass('hide')
         });
         A7_pre_btn.click(function () {
-            $('div .A7').addClass('hide')
-            $('div .A6').removeClass('hide')
+            $('div.A7').addClass('hide')
+            $('div.A6').removeClass('hide')
         });
         A8_pre_btn.click(function () {
-            $('div .A8').addClass('hide')
-            $('div .A7').removeClass('hide')
+            $('div.A8').addClass('hide')
+            $('div.A7').removeClass('hide')
         });
         A9_pre_btn.click(function () {
-            $('div .A9').addClass('hide')
-            $('div .A8').removeClass('hide')
+            $('div.A9').addClass('hide')
+            $('div.A8').removeClass('hide')
         });
         A10_pre_btn.click(function () {
-            $('div .A10').addClass('hide')
-            $('div .A9').removeClass('hide')
+            $('div.A10').addClass('hide')
+            $('div.A9').removeClass('hide')
         });
         A11_pre_btn.click(function () {
-            $('div .A11').addClass('hide')
-            $('div .A10').removeClass('hide')
+            $('div.A11').addClass('hide')
+            $('div.A10').removeClass('hide')
         });
         A12_pre_btn.click(function () {
-            $('div .A12').addClass('hide')
-            $('div .A11').removeClass('hide')
+            $('div.A12').addClass('hide')
+            $('div.A11').removeClass('hide')
         });
     </script>
 {% endblock %}

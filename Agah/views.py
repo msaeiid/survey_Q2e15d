@@ -284,5 +284,15 @@ def Brand(request):
                    }
         return render(request, '../templates/Brand.html', context=context)
     else:
-        print('')
+        A1_answer=request.POST.get('A1')
+        A2_answer = request.POST.getlist('A2')
+        A4_answer = request.POST.getlist('A4')
+        A6_answer = request.POST.getlist('A6')
+        A7_answer = [request.POST.get(item) for item in request.POST if item.startswith('A7')]
+        A8_answer = [request.POST.get(item) for item in request.POST if item.startswith('A8')]
+        A9_answer = [request.POST.get(item) for item in request.POST if item.startswith('A9')]
+        A10_answer = [request.POST.get(item) for item in request.POST if item.startswith('A10')]
+        A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
+        A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
+        #todo:save if first  edit if is second
         pass
