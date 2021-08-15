@@ -319,72 +319,41 @@ def Brand(request):
         else:
             answer = Answer(point=0, answersheet=answersheet, question=A1, option=A1.options.get(value=int(A1_answer)))
         answer.save()
-        # A2 save
-        if answersheet.answers.filter(question=A2).exists():
-            answers = answersheet.answers.filter(question=A2)
-            answers.delete()
-        for item in A2_answer:
-            answer = Answer(point=0, answersheet=answersheet, question=A2, option=A1.options.get(value=int(item)))
-            answer.save()
-        # A4 save
-        if answersheet.answers.filter(question=A4).exists():
-            answers = answersheet.answers.filter(question=A4)
-            answers.delete()
-        for item in A4_answer:
-            answer = Answer(point=0, answersheet=answersheet, question=A4, option=A1.options.get(value=int(item)))
-            answer.save()
+        # A2
+        Save_Brand(answersheet, A2, A1, A2_answer)
+        # A4
+        Save_Brand(answersheet, A4, A1, A4_answer)
         # A6
-        if answersheet.answers.filter(question=A6).exists():
-            answers = answersheet.answers.filter(question=A6)
-            answers.delete()
-        for item in A6_answer:
-            answer = Answer(point=0, answersheet=answersheet, question=A6, option=A1.options.get(value=int(item)))
-            answer.save()
+        Save_Brand(answersheet, A6, A1, A6_answer)
         # A7
-        if answersheet.answers.filter(question=A7).exists():
-            answers = answersheet.answers.filter(question=A7)
-            answers.delete()
-        for i in range(0, len(A7_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A7,
-                            option=A1.options.get(value=int(A6_answer[i])), answer=A7_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A7, A1, A6_answer, A7_answer)
         # A8
-        if answersheet.answers.filter(question=A8).exists():
-            answers = answersheet.answers.filter(question=A8)
-            answers.delete()
-        for i in range(0, len(A8_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A8,
-                            option=A1.options.get(value=int(A6_answer[i])), answer=A8_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A8, A1, A6_answer, A8_answer)
         # A9
-        if answersheet.answers.filter(question=A9).exists():
-            answers = answersheet.answers.filter(question=A9)
-            answers.delete()
-        for i in range(0, len(A9_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A9,
-                            option=A1.options.get(value=int(A6_answer[i])), answer=A9_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A9, A1, A6_answer, A9_answer)
         # A10
-        if answersheet.answers.filter(question=A10).exists():
-            answers = answersheet.answers.filter(question=A10)
-            answers.delete()
-        for i in range(0, len(A10_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A10,
-                            option=A1.options.get(value=int(A6_answer[i])), answer=A10_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A10, A1, A6_answer, A10_answer)
         # A11
-        if answersheet.answers.filter(question=A11).exists():
-            answers = answersheet.answers.filter(question=A11)
-            answers.delete()
-        for i in range(0, len(A11_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A11,
-                            option=A1.options.get(value=int(A6_answer[i])), answer=A11_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A11, A1, A6_answer, A11_answer)
         # A12
-        if answersheet.answers.filter(question=A12).exists():
-            answers = answersheet.answers.filter(question=A12)
-            answers.delete()
-        for i in range(0, len(A12_answer)):
-            answer = Answer(point=0, answersheet=answersheet, question=A12,
-                            option=A1.options.get(value=int(A4_answer[i])), answer=A12_answer[i])
-            answer.save()
+        Save_Brand_with_option(answersheet, A12, A1, A4_answer, A12_answer)
+        pass
+
+
+def Save_Brand(answersheet, question, A1, answers_list):
+    if answersheet.answers.filter(question=question).exists():
+        answers = answersheet.answers.filter(question=question)
+        answers.delete()
+    for item in answers_list:
+        answer = Answer(point=0, answersheet=answersheet, question=question, option=A1.options.get(value=int(item)))
+        answer.save()
+
+
+def Save_Brand_with_option(answersheet, question, A1, handler_list, answers_list):
+    if answersheet.answers.filter(question=question).exists():
+        answers = answersheet.answers.filter(question=question)
+        answers.delete()
+    for i in range(0, len(answers_list)):
+        answer = Answer(point=0, answersheet=answersheet, question=question,
+                        option=A1.options.get(value=int(handler_list[i])), answer=answers_list[i])
+        answer.save()
