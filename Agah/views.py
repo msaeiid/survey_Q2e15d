@@ -312,11 +312,56 @@ def Brand(request):
         A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
         A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
         # todo:save if first  edit if is second
-        #A1 save
-        answer=Answer(point=0,answersheet=answersheet,question=A1,option=A1.options.get(value=int(A1_answer)))
+        # A1 save
+        if answersheet.answers.filter(question=A1).exists():
+            answer = answersheet.answers.get(question=A1)
+            answer.option = A1.options.get(value=int(A1_answer))
+        else:
+            answer = Answer(point=0, answersheet=answersheet, question=A1, option=A1.options.get(value=int(A1_answer)))
         answer.save()
-        #A2 save
+        # A2 save
+        if answersheet.answers.filter(question=A2).exists():
+            answers = answersheet.answers.filter(question=A2)
+            answers.delete()
         for item in A2_answer:
             answer = Answer(point=0, answersheet=answersheet, question=A2, option=A1.options.get(value=int(item)))
+            answer.save()
+        # A4 save
+        if answersheet.answers.filter(question=A4).exists():
+            answers = answersheet.answers.filter(question=A4)
+            answers.delete()
+        for item in A4_answer:
+            answer = Answer(point=0, answersheet=answersheet, question=A4, option=A1.options.get(value=int(item)))
+            answer.save()
+        # A6
+        if answersheet.answers.filter(question=A6).exists():
+            answers = answersheet.answers.filter(question=A6)
+            answers.delete()
+        for item in A6_answer:
+            answer = Answer(point=0, answersheet=answersheet, question=A6, option=A1.options.get(value=int(item)))
+            answer.save()
+        # A7
+        if answersheet.answers.filter(question=A7).exists():
+            answers = answersheet.answers.filter(question=A7)
+            answers.delete()
+        for i in range(0, len(A7_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A7,
+                            option=A1.options.get(value=int(A6_answer[i])), answer=A7_answer[i])
+            answer.save()
+        # A8
+        if answersheet.answers.filter(question=A8).exists():
+            answers = answersheet.answers.filter(question=A8)
+            answers.delete()
+        for i in range(0, len(A8_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A8,
+                            option=A1.options.get(value=int(A6_answer[i])), answer=A8_answer[i])
+            answer.save()
+        # A9
+        if answersheet.answers.filter(question=A9).exists():
+            answers = answersheet.answers.filter(question=A9)
+            answers.delete()
+        for i in range(0, len(A9_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A9,
+                            option=A1.options.get(value=int(A6_answer[i])), answer=A9_answer[i])
             answer.save()
         pass
