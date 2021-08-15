@@ -388,4 +388,3 @@ def Brand(request):
             answer = Answer(point=0, answersheet=answersheet, question=A12,
                             option=A1.options.get(value=int(A4_answer[i])), answer=A12_answer[i])
             answer.save()
-        pass
