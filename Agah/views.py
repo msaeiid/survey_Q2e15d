@@ -158,7 +158,6 @@ def Social(request):
         answer = None
         if Answer.objects.filter(question=Q2, answersheet=answersheet).exists():
             answer = Answer.objects.get(question=Q2, answersheet=answersheet)
-
             answer.option = Q2.options.get(value=age_category)
             answer.point = Q2.options.get(value=age_category).point
         else:
@@ -181,6 +180,8 @@ def Social(request):
 
         # Q4 save answer...
         number_of_child = request.POST.get('number_of_child', 0)
+        if number_of_child == '':
+            number_of_child = 0
         if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
             answer = Answer.objects.get(question=Q4, answersheet=answersheet)
             Child.objects.filter(responder=answersheet.responser).delete()
@@ -229,7 +230,7 @@ def Social(request):
         if int(number_of_child) > 0:
             if int(number_of_child) >= 1:
                 first_child_year = int(request.POST.get('first_child_year'))
-                first_child_gender = request.POST.get('first_child_gender')
+                first_child_gender = Q4_1.options.get(value=int(request.POST.get('first_child_gender')))
                 first_child_age = int(request.POST.get('first_child_age'))
                 child = Child(responder=answersheet.responser, gender=first_child_gender,
                               birthday_year=first_child_year,
@@ -238,7 +239,7 @@ def Social(request):
 
             if int(number_of_child) >= 2:
                 second_child_year = int(request.POST.get('second_child_year'))
-                second_child_gender = request.POST.get('second_child_gender')
+                second_child_gender = Q4_1.options.get(value=int(request.POST.get('second_child_gender')))
                 second_child_age = int(request.POST.get('second_child_age'))
                 child = Child(responder=answersheet.responser, gender=second_child_gender,
                               birthday_year=second_child_year,
@@ -246,7 +247,7 @@ def Social(request):
                 child.save()
             if int(number_of_child) >= 3:
                 third_child_year = int(request.POST.get('third_child_year'))
-                third_child_gender = request.POST.get('third_child_gender')
+                third_child_gender = Q4_1.options.get(value=int(request.POST.get('third_child_gender')))
                 third_child_age = int(request.POST.get('third_child_age'))
                 child = Child(responder=answersheet.responser, gender=third_child_gender,
                               birthday_year=third_child_year,
@@ -311,4 +312,6 @@ def Brand(request):
         A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
         A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
         # todo:save if first  edit if is second
+        #A1
+        answer=Answer(point=0,answersheet=answersheet,question=A1,option=A1.options.get(value=int(A1_answer)))
         pass

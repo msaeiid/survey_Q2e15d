@@ -94,10 +94,8 @@ class Child(models.Model):
 
     responder = models.ForeignKey(to=Responder, on_delete=models.CASCADE, verbose_name='پاسخگو',
                                   related_name='children')
-    gender_choices = (('male', 'پسر'),
-                      ('female', 'دختر'),)
-    gender = models.CharField(verbose_name='جنسیت', choices=gender_choices, max_length=7, blank=False, null=False,
-                              editable=True, )
+    gender = models.ForeignKey(verbose_name='جنسیت', blank=False, null=False, editable=True, to='Option',
+                               on_delete=models.PROTECT)
     birthday_year = models.IntegerField(verbose_name='سال تولد', blank=False, null=False, editable=True, validators=[
         RegexValidator(regex='^1[0-9]{3}$', message='لطفا سال تولد را صحیح و کامل وارد نمایید')])
     age = models.IntegerField(verbose_name='محسابه سن اتومات', blank=False, null=False, editable=True, )
@@ -148,7 +146,7 @@ class Question(models.Model):
     type = models.CharField(max_length=50, choices=question_choices, blank=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.code}'
 
 
 class Option(models.Model):

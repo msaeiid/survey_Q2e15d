@@ -49,7 +49,6 @@ class RegionCustom(admin.ModelAdmin):
 
 class ChildCustom(admin.ModelAdmin):
     list_display = ('responder', 'gender', 'birthday_year',)
-    list_editable = ('gender', 'birthday_year',)
 
 
 class LimitCustom(admin.ModelAdmin):

@@ -85,9 +85,9 @@ class Question_form(forms.Form):
                                                        required=True)
 
         # Q4_1
-        gender_choices = (('', ''),
-                          ('boy', 'پسر'),
-                          ('girl', 'دختر'),)
+        gender_choices = [('', '')]
+        for gender in Q4_1.options.all():
+            gender_choices.append((gender.value,gender.title))
         self.fields['first_child_year'] = forms.IntegerField(label='سال تولد', min_value=1300, max_value=1400,
                                                              required=False, disabled=True)
         self.fields['first_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False,
@@ -133,7 +133,7 @@ class Brand_form(forms.Form):
             for brand in brands:
                 counter += 1
                 self.fields[f'{question.code}-{counter}'] = forms.IntegerField(label=brand.title, required=False)
-                #self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
+                # self.fields[f'{question.code}-{counter}'].widget.attrs['placeholder'] = brand.title
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 self.fields[f'{question.code}-{counter}'].widget.attrs['min'] = 0
@@ -160,6 +160,7 @@ class Brand_form(forms.Form):
             counter = 0
             for brand in brands:
                 counter += 1
-                self.fields[f'{question.code}-{counter}'] = forms.ChoiceField(label=brand.title,choices=temp_choices, required=False)
+                self.fields[f'{question.code}-{counter}'] = forms.ChoiceField(label=brand.title, choices=temp_choices,
+                                                                              required=False)
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
