@@ -312,6 +312,11 @@ def Brand(request):
         A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
         A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
         # todo:save if first  edit if is second
-        #A1
+        #A1 save
         answer=Answer(point=0,answersheet=answersheet,question=A1,option=A1.options.get(value=int(A1_answer)))
+        answer.save()
+        #A2 save
+        for item in A2_answer:
+            answer = Answer(point=0, answersheet=answersheet, question=A2, option=A1.options.get(value=int(item)))
+            answer.save()
         pass
