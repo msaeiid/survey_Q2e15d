@@ -364,4 +364,28 @@ def Brand(request):
             answer = Answer(point=0, answersheet=answersheet, question=A9,
                             option=A1.options.get(value=int(A6_answer[i])), answer=A9_answer[i])
             answer.save()
+        # A10
+        if answersheet.answers.filter(question=A10).exists():
+            answers = answersheet.answers.filter(question=A10)
+            answers.delete()
+        for i in range(0, len(A10_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A10,
+                            option=A1.options.get(value=int(A6_answer[i])), answer=A10_answer[i])
+            answer.save()
+        # A11
+        if answersheet.answers.filter(question=A11).exists():
+            answers = answersheet.answers.filter(question=A11)
+            answers.delete()
+        for i in range(0, len(A11_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A11,
+                            option=A1.options.get(value=int(A6_answer[i])), answer=A11_answer[i])
+            answer.save()
+        # A12
+        if answersheet.answers.filter(question=A12).exists():
+            answers = answersheet.answers.filter(question=A12)
+            answers.delete()
+        for i in range(0, len(A12_answer)):
+            answer = Answer(point=0, answersheet=answersheet, question=A12,
+                            option=A1.options.get(value=int(A4_answer[i])), answer=A12_answer[i])
+            answer.save()
         pass
