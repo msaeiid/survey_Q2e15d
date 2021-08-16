@@ -337,23 +337,71 @@ def Brand(request):
         Save_Brand_with_option(answersheet, A11, A1, A6_answer, A11_answer)
         # A12
         Save_Brand_with_option(answersheet, A12, A1, A4_answer, A12_answer)
-        pass
+        return redirect(reverse('agah:sentence'))
 
 
 def Save_Brand(answersheet, question, A1, answers_list):
     if answersheet.answers.filter(question=question).exists():
         answers = answersheet.answers.filter(question=question)
-        answers.delete()
-    for item in answers_list:
-        answer = Answer(point=0, answersheet=answersheet, question=question, option=A1.options.get(value=int(item)))
-        answer.save()
+        length = max(len(answers_list), len(answers))
+        if len(answers_list) == len(answers):  # تعداد قبلی و جواب فعلی برار باشد
+            for i in range(length):
+                answers[i].option = A1.options.get(value=int(answers_list[i]))
+                answers[i].save()
+        elif len(answers_list) > len(answers):  # تعداد جواب فعلی بیشتر باشد
+            for i in range(length):
+                try:
+                    answers[i].option = A1.options.get(value=int(answers_list[i]))
+                    answers[i].save()
+                except:
+                    answer = Answer(point=0, answersheet=answersheet, question=question,
+                                    option=A1.options.get(value=int(answers_list[i])))
+                    answer.save()
+        elif len(answers_list) < len(answers):  # تعداد جواب فعلی کمتر باشد
+            for i in range(length):
+                try:
+                    answers[i].option = A1.options.get(value=int(answers_list[i]))
+                    answers[i].save()
+                except:
+                    answers[i].delete()
+    else:
+        for item in answers_list:
+            answer = Answer(point=0, answersheet=answersheet, question=question, option=A1.options.get(value=int(item)))
+            answer.save()
 
 
 def Save_Brand_with_option(answersheet, question, A1, handler_list, answers_list):
     if answersheet.answers.filter(question=question).exists():
         answers = answersheet.answers.filter(question=question)
-        answers.delete()
-    for i in range(0, len(answers_list)):
-        answer = Answer(point=0, answersheet=answersheet, question=question,
-                        option=A1.options.get(value=int(handler_list[i])), answer=answers_list[i])
-        answer.save()
+        length = max(len(answers_list), len(answers))
+        if len(answers) == len(answers_list):  # تعداد قبلی و جواب فعلی برار باشد
+            for i in range(length):
+                answers[i].option = A1.options.get(value=int(handler_list[i]))
+                answers[i].answer = answers_list[i]
+                answers[i].save()
+        elif len(answers) < len(answers_list):  # تعداد جواب فعلی بیشتر باشد
+            for i in range(length):
+                try:
+                    answers[i].option = A1.options.get(value=int(handler_list[i]))
+                    answers[i].answer = answers_list[i]
+                    answers[i].save()
+                except:
+                    answer = Answer(point=0, answersheet=answersheet, question=question,
+                                    option=A1.options.get(value=int(handler_list[i])), answer=answers_list[i])
+                    answer.save()
+        elif len(answers) > len(answers_list):  # تعداد جواب فعلی کمتر باشد
+            for i in range(length):
+                try:
+                    answers[i].option = A1.options.get(value=int(handler_list[i]))
+                    answers[i].answer = answers_list[i]
+                    answers[i].save()
+                except:
+                    answers[i].delete()
+    else:
+        for i in range(0, len(answers_list)):
+            answer = Answer(point=0, answersheet=answersheet, question=question,
+                            option=A1.options.get(value=int(handler_list[i])), answer=answers_list[i])
+            answer.save()
+
+def Sentence(request):
+    pass

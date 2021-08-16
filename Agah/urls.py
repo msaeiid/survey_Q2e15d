@@ -9,5 +9,6 @@ urlpatterns = [
     path('personal/<int:pk>', views.Personal, name='persnoal'),
     path('social/', views.Social, name='social'),
     path('interviwer_name/', views.interviwer_name, name='interviwer_name'),
-    path('brand/', views.Brand, name='brand')
+    path('brand/', views.Brand, name='brand'),
+    path('sentecnce/', views.Sentence, name='sentence')
 ]
