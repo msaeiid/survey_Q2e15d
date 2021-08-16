@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView
-from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form, Brand_form
-from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child, Option
+from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form, Brand_form, Sentence_from
+from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child
 from django.contrib import messages
 
 
@@ -405,6 +405,13 @@ def Save_Brand_with_option(answersheet, question, A1, handler_list, answers_list
 
 @csrf_protect
 def Sentence(request):
+    answersheet = request.session.get('answersheet')
+    try:
+        answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
+    except:
+        survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
+        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        return redirect(reverse('agah:survey', args=[survey.pk]))
     A13 = get_object_or_404(Question, code='A13')
     A13_1 = get_object_or_404(Question, code='A13-1')
     A13_2 = get_object_or_404(Question, code='A13-2')
@@ -413,7 +420,10 @@ def Sentence(request):
     A13_5 = get_object_or_404(Question, code='A13-5')
     A13_6 = get_object_or_404(Question, code='A13-6')
     A13_7 = get_object_or_404(Question, code='A13-7')
+    A6 = get_object_or_404(Question, code='A6')
+    answers_to_A6 = answersheet.answers.filter(question=A6)
+    form = Sentence_from(request.GET, instance={'answers_to_A6': answers_to_A6})
     if request.method == 'GET':
         context = {'A13': A13, 'A13_1': A13_1, 'A13_2': A13_2, 'A13_3': A13_3, 'A13_4': A13_4, 'A13_5': A13_5,
-                   'A13_6': A13_6, 'A13_7': A13_7}
+                   'A13_6': A13_6, 'A13_7': A13_7, 'form': form}
         return render(request, '../templates/Sentence.html', context=context)

@@ -166,6 +166,25 @@ class Brand_form(forms.Form):
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
 
 
-class Sentence(forms.Form):
+class Sentence_from(forms.Form):
     def __init__(self, *args, **kwargs):
-        super(Sentence, self).__init__()
+        super(Sentence_from, self).__init__()
+        answers_to_A6 = kwargs.get('instance').get('answers_to_A6')
+        sentence_choices = []
+        for item in answers_to_A6:
+            sentence_choices.append((item.option.value, item.option.title))
+        sentence_choices = tuple(sentence_choices)
+        self.fields['A13_1'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_2'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_3'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_4'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_5'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_6'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_7'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
+                                                         widget=forms.CheckboxSelectMultiple, required=False)
