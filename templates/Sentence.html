@@ -1,0 +1,161 @@
+{% extends 'Base.html' %}
+{% block title %}
+    بخش جملات
+{% endblock %}
+{% block header %}
+    <div class="question">
+        <h5>
+            {{ A13.code }}
+            {{ A13.title }}
+        </h5>
+    </div>
+{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="question {{ A13_1.code }} ">
+            <h5>
+                {{ A13_1.code }}
+                {{ A13_1.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_1.code }}" disabled value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_1.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_2.code }} ">
+            <h5>
+                {{ A13_2.code }}
+                {{ A13_2.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_2.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_2.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_3.code }} ">
+            <h5>
+                {{ A13_3.code }}
+                {{ A13_3.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_3.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_3.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_4.code }} ">
+            <h5>
+                {{ A13_4.code }}
+                {{ A13_4.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_4.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_4.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_5.code }} ">
+            <h5>
+                {{ A13_5.code }}
+                {{ A13_5.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_5.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_5.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_6.code }} ">
+            <h5>
+                {{ A13_6.code }}
+                {{ A13_6.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_6.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="button" name="{{ A13_6.code }}" value="next"
+                            class="float-left btn btn-primary">پرسش
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="question {{ A13_7.code }} ">
+            <h5>
+                {{ A13_7.code }}
+                {{ A13_7.title }}
+            </h5>
+            <div id="option">
+                گزینه
+                <div class="clearfix">
+                    <button type="button" name="{{ A13_7.code }}" value="previous"
+                            class="float-right btn btn-primary">
+                        پرسش قبل
+                    </button>
+                    <button type="submit" class="float-left btn btn-success">مرحله
+                        بعد
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block exta_header %}
+    <style>
+        button {
+            margin: 10px;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <script>
+        $('button').addClass('col-lg-5 col-md-5 col-sm-5 col-5')
+    </script>
+{% endblock %}

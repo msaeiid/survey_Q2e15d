@@ -87,7 +87,7 @@ class Question_form(forms.Form):
         # Q4_1
         gender_choices = [('', '')]
         for gender in Q4_1.options.all():
-            gender_choices.append((gender.value,gender.title))
+            gender_choices.append((gender.value, gender.title))
         self.fields['first_child_year'] = forms.IntegerField(label='سال تولد', min_value=1300, max_value=1400,
                                                              required=False, disabled=True)
         self.fields['first_child_gender'] = forms.ChoiceField(label='جنسیت', choices=gender_choices, required=False,
@@ -164,3 +164,8 @@ class Brand_form(forms.Form):
                                                                               required=False)
                 self.fields[f'{question.code}-{counter}'].widget.attrs['brand'] = counter
                 self.fields[f'{question.code}-{counter}'].widget.attrs['class'] = question.code
+
+
+class Sentence(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(Sentence, self).__init__()

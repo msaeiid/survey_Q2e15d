@@ -311,7 +311,6 @@ def Brand(request):
         A10_answer = [request.POST.get(item) for item in request.POST if item.startswith('A10')]
         A11_answer = [request.POST.get(item) for item in request.POST if item.startswith('A11')]
         A12_answer = [request.POST.get(item) for item in request.POST if item.startswith('A12')]
-        # todo:save if first  edit if is second
         # A1 save
         if answersheet.answers.filter(question=A1).exists():
             answer = answersheet.answers.get(question=A1)
@@ -403,5 +402,18 @@ def Save_Brand_with_option(answersheet, question, A1, handler_list, answers_list
                             option=A1.options.get(value=int(handler_list[i])), answer=answers_list[i])
             answer.save()
 
+
+@csrf_protect
 def Sentence(request):
-    pass
+    A13 = get_object_or_404(Question, code='A13')
+    A13_1 = get_object_or_404(Question, code='A13-1')
+    A13_2 = get_object_or_404(Question, code='A13-2')
+    A13_3 = get_object_or_404(Question, code='A13-3')
+    A13_4 = get_object_or_404(Question, code='A13-4')
+    A13_5 = get_object_or_404(Question, code='A13-5')
+    A13_6 = get_object_or_404(Question, code='A13-6')
+    A13_7 = get_object_or_404(Question, code='A13-7')
+    if request.method == 'GET':
+        context = {'A13': A13, 'A13_1': A13_1, 'A13_2': A13_2, 'A13_3': A13_3, 'A13_4': A13_4, 'A13_5': A13_5,
+                   'A13_6': A13_6, 'A13_7': A13_7}
+        return render(request, '../templates/Sentence.html', context=context)
