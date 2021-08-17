@@ -23,7 +23,7 @@
                 </button>
             </div>
         </div>
-        <div class="question hide {{ A2.code }} ">
+        <div class="question  {{ A2.code }} ">
             <h5>
                 {{ A2.code }}
                 {{ A2.title }}
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A4.code }} ">
+        <div class="question  {{ A4.code }} ">
             <h5>
                 {{ A4.code }}
                 {{ A4.title }}
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A6.code }} ">
+        <div class="question  {{ A6.code }} ">
             <h5>
                 {{ A6.code }}
                 {{ A6.title }}
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A7.code }} ">
+        <div class="question  {{ A7.code }} ">
             <h5>
                 {{ A7.code }}
                 {{ A7.title }}
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A8.code }} ">
+        <div class="question  {{ A8.code }} ">
             <h5>
                 {{ A8.code }}
                 {{ A8.title }}
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A9.code }} ">
+        <div class="question  {{ A9.code }} ">
             <h5>
                 {{ A9.code }}
                 {{ A9.title }}
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A10.code }} ">
+        <div class="question  {{ A10.code }} ">
             <h5>
                 {{ A10.code }}
                 {{ A10.title }}
@@ -156,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A11.code }} ">
+        <div class="question  {{ A11.code }} ">
             <h5>
                 {{ A11.code }}
                 {{ A11.title }}
@@ -175,7 +175,7 @@
                 </div>
             </div>
         </div>
-        <div class="question hide {{ A12.code }} ">
+        <div class="question  {{ A12.code }} ">
             <h5>
                 {{ A12.code }}
                 {{ A12.title }}
@@ -231,7 +231,7 @@
             } else {
                 var A2_options = $('input[type=checkbox][name=A2]')
                 A2_options.prop('disabled', false)
-                A2_options.prop('checked', false)
+                //A2_options.prop('checked', false)
                 $('.A2 label').removeClass('text-success')
                 $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('disabled', 'true')
                 var id = $('input[type=checkbox][name=A2][value=' + checked_options.val() + ']').attr('id')
@@ -250,7 +250,7 @@
             } else {
                 var A4_options = $('input[type=checkbox][name=A4]')
                 A4_options.prop('disabled', false)
-                A4_options.prop('checked', false)
+                //A4_options.prop('checked', false)
                 $('.A4 label').removeClass('text-muted')
 
                 result = []
@@ -260,7 +260,7 @@
                 result.push(parseInt($('input[type=radio][name=A1]:checked').val()))
                 $('input[type=checkbox][name=A4]').each(function () {
                     if (!result.includes(parseInt($(this).val()))) {
-                        $('input[type=checkbox][name=A4][value=' + $(this).val() + ']').attr('disabled', 'true')
+                        $('input[type=checkbox][name=A4][value=' + $(this).val() + ']').attr('disabled', 'true').prop('checked', false)
                         var id = $('input[type=checkbox][name=A4][value=' + $(this).val() + ']').attr('id')
                         $('label[for=' + id + ']').addClass('text-muted')
                     }
@@ -280,7 +280,7 @@
                 //clear A6
                 var A6_options = $('input[type=checkbox][name=A6]')
                 A6_options.prop('disabled', false)
-                A6_options.prop('checked', false)
+                //A6_options.prop('checked', false)
                 $('.A6 label').removeClass('text-muted')
 
                 //setA6
@@ -290,7 +290,7 @@
                 });
                 $('input[type=checkbox][name=A6]').each(function () {
                     if (!result.includes(parseInt($(this).val()))) {
-                        $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('disabled', 'true')
+                        $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('disabled', 'true').prop('checked', false)
                         var id = $('input[type=checkbox][name=A6][value=' + $(this).val() + ']').attr('id')
                         $('label[for=' + id + ']').addClass('text-muted')
                     }
@@ -298,13 +298,13 @@
 
                 //clear A12
                 var A12_options = $('select[class=A12]')
-                A12_options.val('')
+                //A12_options.val('')
                 A12_options.prop('disabled', false)
 
                 //setA12
                 $('select[class=A12]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
                 $('div.A4').addClass('hide')
@@ -325,58 +325,58 @@
                 });
                 //A7 clear
                 var A7_options = $('input[type=number][class=A7]')
-                A7_options.val('')
+                //A7_options.val('')
                 A7_options.prop('disabled', false)
                 //A7 set
                 $('input[type=number][class=A7]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
 
                 //A8 clear
                 var A8_options = $('input[type=number][class=A8]')
-                A8_options.val('')
+                //A8_options.val('')
                 A8_options.prop('disabled', false)
                 //A8 set
                 $('input[type=number][class=A8]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
 
 
                 //A9 clear
                 var A9_options = $('input[type=number][class=A9]')
-                A9_options.val('')
+                //A9_options.val('')
                 A9_options.prop('disabled', false)
                 //A8 set
                 $('input[type=number][class=A9]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
 
 
                 //A10 clear
                 var A10_options = $('input[type=number][class=A10]')
-                A10_options.val('')
+                //A10_options.val('')
                 A10_options.prop('disabled', false)
                 //A10 set
                 $('input[type=number][class=A10]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
 
                 //A11 clear
                 var A11_options = $('select[class=A11]')
-                A11_options.val('')
+                //A11_options.val('')
                 A11_options.prop('disabled', false)
                 //A11 set
                 $('select[class=A11]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
-                        $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true')
+                        $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
                     }
                 })
                 $('div.A6').addClass('hide')
