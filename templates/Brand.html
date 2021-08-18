@@ -331,6 +331,11 @@
                 $('input[type=number][class=A7]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('input[type=number][class=A7][name=A7-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
 
@@ -342,6 +347,11 @@
                 $('input[type=number][class=A8]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('input[type=number][class=A8][name=A8-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
 
@@ -354,6 +364,11 @@
                 $('input[type=number][class=A9]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('input[type=number][class=A9][name=A9-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
 
@@ -366,6 +381,11 @@
                 $('input[type=number][class=A10]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('input[type=number][class=A10][name=A10-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
 
@@ -377,6 +397,11 @@
                 $('select[class=A11]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('select[class=A11][name=A11-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
                 $('div.A6').addClass('hide')
