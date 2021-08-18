@@ -13,5 +13,5 @@
             </div>
         {% endfor %}
     {% endif %}
-    <a href="{% url 'agah:persnoal' Survey.pk %}">{{ Survey.title }}</a>
+    <a class="btn btn-lg btn-primary" href="{% url 'agah:persnoal' Survey.pk %}">{{ Survey.title }}</a>
 {% endblock %}
