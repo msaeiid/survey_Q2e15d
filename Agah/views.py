@@ -447,6 +447,10 @@ def Sentence(request):
 
 def Save_Sentence(question, answer_lst, answersheet, options):
     for item in answer_lst:
-        option = options.get(value=int(item))
-        answer = Answer(point=0, answersheet=answersheet, question=question, option=option)
+        try:
+            option = options.get(value=int(item))
+        except:
+            answer = Answer(point=0, answersheet=answersheet, question=question, answer=item)
+        else:
+            answer = Answer(point=0, answersheet=answersheet, question=question, option=option)
         answer.save()
