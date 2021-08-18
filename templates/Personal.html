@@ -191,7 +191,7 @@
             }
         });
         $('form').submit(function () {
-            console.log('submit')
+            $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled',true)
         });
     </script>
 {% endblock %}

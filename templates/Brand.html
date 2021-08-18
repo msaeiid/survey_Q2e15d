@@ -573,7 +573,8 @@
                 alert(error)
                 return false
             } else {
-                $('div .A12').addClass('hide')
+                $('button[type=button][name=A12]').attr('disabled',true)
+                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled',true)
                 return true
             }
         });

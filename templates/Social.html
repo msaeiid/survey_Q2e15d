@@ -392,6 +392,7 @@
             if (count >= 1 && count <= 3) {
                 $('input[type=checkbox]').addClass('is-valid')
                 $('input[type=checkbox]').removeClass('is-invalid')
+                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled',true)
                 return true
             } else if (count == 0) {
                 $('input[type=checkbox]').removeClass('is-valid')

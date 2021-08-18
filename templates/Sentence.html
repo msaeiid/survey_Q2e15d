@@ -193,6 +193,8 @@
            var agree=confirm('پس از تایید پرسشنامه ویرایش آن امکان پذیر نیست')
             if (agree ==true)
             {
+                $('button[type=button][name=A13-7]').attr('disabled',true)
+                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled',true)
                 return true
             }
             else {
