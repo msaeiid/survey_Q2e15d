@@ -28,8 +28,6 @@
                 {{ Q2.title }}
             </h5>
             {{ form.age_year }}
-            <div class="valid-feedback valid-age">
-            </div>
             <div class="invalid-feedback">
                 {{ form.errors.age_year.as_text }}
             </div>
@@ -40,9 +38,6 @@
                 {{ Q3.title }}
             </h5>
             {{ form.marital_status }}
-            <div class="valid-feedback valid-age">
-                معتبر
-            </div>
             <div class="invalid-feedback">
                 {{ form.marital_status.errors.as_text }}
             </div>
@@ -53,9 +48,6 @@
                 {{ Q4.title }}
             </h5>
             {{ form.number_of_child }}
-            <div class="valid-feedback">
-                معتبر
-            </div>
             <div class="invalid-feedback">
                 تعداد فرزندان نامعتبر است
             </div>

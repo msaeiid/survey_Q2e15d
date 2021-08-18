@@ -14,9 +14,6 @@
             <div>
                 <label for="{{ responder_frm.firstname.id_for_label }}">{{ responder_frm.firstname.label }}</label>
                 {{ responder_frm.firstname }}
-                <div class="valid-feedback">
-                    معتبر
-                </div>
                 <div class="invalid-feedback">
                     {{ responder_frm.errors.firstname.as_text }}
                 </div>
@@ -24,9 +21,6 @@
             <div>
                 <label for="{{ responder_frm.lastname.id_for_label }}">{{ responder_frm.lastname.label }}</label>
                 {{ responder_frm.lastname }}
-                <div class="valid-feedback">
-                    معتبر
-                </div>
                 <div class="invalid-feedback">
                     {{ responder_frm.errors.lastname.as_text }}
                 </div>
@@ -41,9 +35,6 @@
             <div>
                 <label for="{{ responder_frm.mobile.id_for_label }}">{{ responder_frm.mobile.label }}</label>
                 {{ responder_frm.mobile }}
-                <div class="valid-feedback">
-                    معتبر
-                </div>
                 <div class="invalid-feedback">
                     موبایل را کامل وارد کنید
                 </div>
@@ -61,7 +52,6 @@
                 <label for="{{ interviewer_frm.code.id_for_label }}">{{ interviewer_frm.code.label }}</label>
                 {{ interviewer_frm.code }}
                 <div class="valid-feedback interviewer">
-                    معتبر
                 </div>
                 <div class="invalid-feedback interviewer-error">
                     {{ interviewer_frm.code.errors.as_text }}
