@@ -146,7 +146,7 @@ class Question(models.Model):
     type = models.CharField(max_length=50, choices=question_choices, blank=True)
 
     def __str__(self):
-        return f'{self.code}'
+        return f'{self.title}'
 
 
 class Option(models.Model):

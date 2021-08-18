@@ -144,6 +144,8 @@ def Social(request):
         del age
         if marital_status == 0 or age_category == 0:
             answersheet.delete()
+            answersheet.responser.delete()
+            request.session.flush()
             messages.warning(request=request, message=('به علت عدم پاسخ به وضعيت تاهل نظرسنجی به اتمام رسید.'))
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
@@ -151,6 +153,8 @@ def Social(request):
             if not answersheet.answers.filter(question__code='Q2').exists():
                 if not limit.check_for_capacity():
                     answersheet.delete()
+                    answersheet.responser.delete()
+                    request.session.flush()
                     messages.warning(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
                     return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
 
