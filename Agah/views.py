@@ -121,7 +121,7 @@ def Social(request):
         answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
     except:
         survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
-        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        messages.warning(request=request, message='شما پرسشنامه فعال ندارید')
         return redirect(reverse('agah:survey', args=[survey.pk]))
     Q2 = get_object_or_404(Question, pk=request.session['question'])
     Q3 = Q2.next_question
@@ -144,14 +144,14 @@ def Social(request):
         del age
         if marital_status == 0 or age_category == 0:
             answersheet.delete()
-            messages.info(request=request, message=('به علت عدم پاسخ به وضعيت تاهل نظرسنجی به اتمام رسید.'))
+            messages.warning(request=request, message=('به علت عدم پاسخ به وضعيت تاهل نظرسنجی به اتمام رسید.'))
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
             if not answersheet.answers.filter(question__code='Q2').exists():
                 if not limit.check_for_capacity():
                     answersheet.delete()
-                    messages.info(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
+                    messages.warning(request=request, message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
                     return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
 
         # Q2 save answer...
@@ -265,7 +265,7 @@ def Brand(request):
         answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
     except:
         survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
-        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        messages.warning(request=request, message='شما پرسشنامه فعال ندارید')
         return redirect(reverse('agah:survey', args=[survey.pk]))
     A1 = Question.objects.get(code='A1')
     A2 = Question.objects.get(code='A2')
@@ -410,7 +410,7 @@ def Sentence(request):
         answersheet = get_object_or_404(AnswerSheet, pk=answersheet)
     except:
         survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
-        messages.info(request=request, message='شما پرسشنامه فعال ندارید')
+        messages.warning(request=request, message='شما پرسشنامه فعال ندارید')
         return redirect(reverse('agah:survey', args=[survey.pk]))
     A13 = get_object_or_404(Question, code='A13')
     A13_1 = get_object_or_404(Question, code='A13-1')
@@ -420,7 +420,10 @@ def Sentence(request):
     A13_5 = get_object_or_404(Question, code='A13-5')
     A13_6 = get_object_or_404(Question, code='A13-6')
     A13_7 = get_object_or_404(Question, code='A13-7')
-    A6 = get_object_or_404(Question, code='A6')
+    try:
+        A6 = get_object_or_404(Question, code='A6')
+    except:
+        return redirect(reverse('agah:brand'))
     answers_to_A6 = answersheet.answers.filter(question=A6)
     form = Sentence_from(request.GET, instance={'answers_to_A6': answers_to_A6})
     if request.method == 'GET':
@@ -428,4 +431,22 @@ def Sentence(request):
                    'A13_6': A13_6, 'A13_7': A13_7, 'form': form}
         return render(request, '../templates/Sentence.html', context=context)
     else:
-        pass
+        options = get_object_or_404(Question, code='A1').options
+        Save_Sentence(A13_1, request.POST.getlist('A13_1'), answersheet, options)
+        Save_Sentence(A13_2, request.POST.getlist('A13_2'), answersheet, options)
+        Save_Sentence(A13_3, request.POST.getlist('A13_3'), answersheet, options)
+        Save_Sentence(A13_4, request.POST.getlist('A13_4'), answersheet, options)
+        Save_Sentence(A13_5, request.POST.getlist('A13_5'), answersheet, options)
+        Save_Sentence(A13_6, request.POST.getlist('A13_6'), answersheet, options)
+        Save_Sentence(A13_7, request.POST.getlist('A13_7'), answersheet, options)
+        survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
+        messages.success(request=request, message='تشکر از شرکت در نظرسنجی پرسشنامه با موفقیت ثبت شد')
+        request.session.flush()
+        return redirect(reverse('agah:survey', args=[survey.pk]))
+
+
+def Save_Sentence(question, answer_lst, answersheet, options):
+    for item in answer_lst:
+        option = options.get(value=int(item))
+        answer = Answer(point=0, answersheet=answersheet, question=question, option=option)
+        answer.save()

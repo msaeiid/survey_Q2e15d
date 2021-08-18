@@ -2,8 +2,11 @@
 {% block content %}
     {% if messages %}
         {% for msg in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ msg }}
+            <div class="alert
+{% if msg.level_tag == 'warning' %} alert-warning {% endif %}
+{% if msg.level_tag == 'success' %} alert-success {% endif %}
+             alert-dismissible fade show" role="alert">
+                {{ msg }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
