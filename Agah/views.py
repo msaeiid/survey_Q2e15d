@@ -427,3 +427,5 @@ def Sentence(request):
         context = {'A13': A13, 'A13_1': A13_1, 'A13_2': A13_2, 'A13_3': A13_3, 'A13_4': A13_4, 'A13_5': A13_5,
                    'A13_6': A13_6, 'A13_7': A13_7, 'form': form}
         return render(request, '../templates/Sentence.html', context=context)
+    else:
+        pass

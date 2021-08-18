@@ -139,8 +139,7 @@
                             class="float-right btn btn-primary">
                         پرسش قبل
                     </button>
-                    <button type="submit" class="float-left btn btn-success">مرحله
-                        بعد
+                    <button type="submit" step="7" class="float-left btn btn-success">تایید نهایی
                     </button>
                 </div>
             </div>
@@ -175,13 +174,30 @@
                 $('div.' + ++selected_item_step + '').removeClass('hide')
             }
         });
+        $('button[type=submit]').click(function () {
+            var selected_item_step = $(this).attr('step')
+            var count = $('input[type=checkbox][class=' + selected_item_step + ']:checked').length
+            if (count == 0) {
+                alert('لطفا یک گزینه را انتخاب کنید')
+                return false
+            } else {
+                return true
+            }
+        });
         $('button[type=button][value=previous]').click(function () {
             var selected_item_step = $(this).attr('step')
             $('div.' + selected_item_step + '').addClass('hide')
             $('div.' + --selected_item_step + '').removeClass('hide')
         });
         $('form').submit(function (){
-           alert('hey')
+           var agree=confirm('پس از تایید پرسشنامه ویرایش آن امکان پذیر نیست')
+            if (agree ==true)
+            {
+                return true
+            }
+            else {
+                return false
+            }
         });
     </script>
 {% endblock %}
