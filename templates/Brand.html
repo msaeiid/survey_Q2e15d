@@ -305,6 +305,11 @@
                 $('select[class=A12]').each(function () {
                     if (!result.includes(parseInt($(this).attr('brand')))) {
                         $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('disabled', 'true').val('')
+                        var id = $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').addClass('text-muted')
+                    } else {
+                        var id = $('select[class=A12][name=A12-' + $(this).attr('brand') + ']').attr('id')
+                        $('label[for=' + id + ']').removeClass('text-muted')
                     }
                 })
                 $('div.A4').addClass('hide')
