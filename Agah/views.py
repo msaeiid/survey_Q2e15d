@@ -75,6 +75,14 @@ def Personal(request, pk):
                     answersheet.responser.mobile = responder_frm.cleaned_data.get('mobile')
                     answersheet.responser.city_id = responder_frm.cleaned_data.get('city')
                     answersheet.responser.save()
+            else:
+                if not responder_frm.is_valid():
+                    messages.warning(request,'لطفا برای نام و نام خانوادگی از حروف فارسی استفاده نمایید')
+                if not answersheet_frm.is_valid():
+                    messages.warning(request,'لطفا تاریخ را مجدد انتخاب نمایید')
+                context = {'survey': survey, 'interviewer_frm': interviewer_frm, 'answersheet_frm': answersheet_frm,
+                           'responder_frm': responder_frm, 'Q1': Q1}
+                return render(request=request, template_name='Personal.html', context=context)
         request.session['answersheet'] = answersheet.pk
         request.session['survey'] = survey.pk  # todo: should i delete?
         request.session['question'] = Q1.next_question.pk  # todo: should i delete?

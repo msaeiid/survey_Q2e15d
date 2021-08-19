@@ -5,6 +5,21 @@
     {{ Q1.title }}
 {% endblock %}
 {% block content %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert
+{% if msg.level_tag == 'warning' %} alert-warning {% endif %}
+{% if msg.level_tag == 'success' %} alert-success {% endif %}
+             alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
     <div class="question">
         <form method="post">
             {% csrf_token %}
@@ -67,7 +82,6 @@
             <button type="submit" class="btn btn-success col-lg-4 col-md-4 col-sm-6 col-6">مرحله بعد</button>
         </form>
     </div>
-
 
 
     <!-- By default, Datepicker using jQuery, you need to set your script after loading jQuery! -->
@@ -205,6 +219,7 @@
                     }
                 }
             });
+            $('input[name=date]').val('')
         });
 
         //auto complete
