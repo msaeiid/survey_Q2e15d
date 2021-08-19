@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jalali_date',
-    'Agah.apps.AgahConfig'
+    'Agah.apps.AgahConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

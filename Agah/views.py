@@ -3,8 +3,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView
+
+from Agah.Serializers import Responder_Firstname_Serialier
 from Agah.forms import Interviewer_form, Answersheet_form, Responder_form, Question_form, Brand_form, Sentence_from
-from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child
+from Agah.models import Survey, Question, AnswerSheet, Interviewer, Limit, Answer, Child, Responder
 from django.contrib import messages
 
 
@@ -77,6 +79,15 @@ def Personal(request, pk):
         request.session['survey'] = survey.pk  # todo: should i delete?
         request.session['question'] = Q1.next_question.pk  # todo: should i delete?
         return redirect(reverse('agah:social'))
+
+
+def Firstname_List(request):
+    if request.is_ajax() and request.method == 'GET':
+        first_name_list=Responder.objects.all()
+        serialized_data = Responder_Firstname_Serialier(first_name_list, many=True)
+        context = {'list': serialized_data.data}
+        if len(first_name_list) > 0:
+            return JsonResponse(context, status=200)
 
 
 def interviwer_name(request):
