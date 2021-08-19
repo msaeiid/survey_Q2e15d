@@ -53,6 +53,10 @@ def Personal(request, pk):
                 answersheet.interviewer = interviwer
                 answersheet.save()
             else:
+                if not responder_frm.is_valid():
+                    messages.warning(request, 'لطفا برای نام و نام خانوادگی از حروف فارسی استفاده نمایید')
+                if not answersheet_frm.is_valid():
+                    messages.warning(request, 'لطفا تاریخ را مجدد انتخاب نمایید')
                 context = {'survey': survey, 'interviewer_frm': interviewer_frm, 'answersheet_frm': answersheet_frm,
                            'responder_frm': responder_frm, 'Q1': Q1}
                 return render(request=request, template_name='Personal.html', context=context)
@@ -77,9 +81,9 @@ def Personal(request, pk):
                     answersheet.responser.save()
             else:
                 if not responder_frm.is_valid():
-                    messages.warning(request,'لطفا برای نام و نام خانوادگی از حروف فارسی استفاده نمایید')
+                    messages.warning(request, 'لطفا برای نام و نام خانوادگی از حروف فارسی استفاده نمایید')
                 if not answersheet_frm.is_valid():
-                    messages.warning(request,'لطفا تاریخ را مجدد انتخاب نمایید')
+                    messages.warning(request, 'لطفا تاریخ را مجدد انتخاب نمایید')
                 context = {'survey': survey, 'interviewer_frm': interviewer_frm, 'answersheet_frm': answersheet_frm,
                            'responder_frm': responder_frm, 'Q1': Q1}
                 return render(request=request, template_name='Personal.html', context=context)
@@ -91,7 +95,7 @@ def Personal(request, pk):
 
 def Firstname_List(request):
     if request.is_ajax() and request.method == 'GET':
-        first_name_list=Responder.objects.all()
+        first_name_list = Responder.objects.all()
         serialized_data = Responder_Firstname_Serialier(first_name_list, many=True)
         context = {'list': serialized_data.data}
         if len(first_name_list) > 0:
