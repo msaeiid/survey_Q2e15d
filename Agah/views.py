@@ -169,7 +169,7 @@ def Social(request):
             answersheet.delete()
             answersheet.responser.delete()
             request.session.flush()
-            messages.warning(request=request, message=('به علت عدم پاسخ به وضعيت تاهل نظرسنجی به اتمام رسید.'))
+            messages.warning(request=request, message=('کابر گرامی به علت امتناع از پاسخ به سوال جنسیت و یا نبودن سن شما در محدوده مورد نظر، نظرسنجی به اتمام رسید.'))
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
