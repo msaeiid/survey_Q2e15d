@@ -199,7 +199,15 @@
             }
         });
         $('form').submit(function () {
-            $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled', true)
+            var inputs = $('input').hasClass('is-invalid')
+            var selects=$('select').hasClass('is-invalid')
+            if (inputs || selects) {
+                alert('کاربر گرامی از صحیح بودن مقادیر ورودی اطمینان حاصل نمایید')
+                return false
+            } else {
+                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled', true)
+                return true
+            }
         });
         $('input').attr('autocomplete', 'off')
         $(document).ready(function () {
