@@ -1,7 +1,12 @@
 from django.contrib import admin
+from django.db.models import Q
 
 from Agah.models import City, Responder, Interviewer, Question, Survey, AnswerSheet, Option, Answer, Region, \
     Child, Limit
+
+admin.site.site_header = 'نظرسنجی'
+admin.site.site_title = 'نظرسنجی'
+admin.site.index_title = ''
 
 
 class AnswerSheetCustom(admin.ModelAdmin):
@@ -40,6 +45,16 @@ class OptionCustom(admin.ModelAdmin):
 
 class AnswerCustom(admin.ModelAdmin):
     list_display = ('answersheet', 'question', 'option', 'answer', 'point',)
+    search_fields = ['answersheet']
+
+    def get_search_results(self, request, queryset, search_term):
+        if search_term != '':
+            return queryset.filter(Q(answersheet__responser__firstname__icontains=search_term) | Q(
+                answersheet__responser__lastname__icontains=search_term)), True
+        else:
+            return queryset, False
+
+    empty_value_display = 'خالی'
 
 
 class RegionCustom(admin.ModelAdmin):
