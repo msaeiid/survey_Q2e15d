@@ -146,7 +146,7 @@ class Question(models.Model):
     type = models.CharField(max_length=50, choices=question_choices, blank=True)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.code}'
 
 
 class Option(models.Model):
@@ -161,7 +161,7 @@ class Option(models.Model):
     point = models.PositiveSmallIntegerField(verbose_name='امتیاز')
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.value}'
 
 
 class AnswerSheet(models.Model):
