@@ -1,0 +1,7 @@
+asgiref==3.4.1
+Django==3.2.6
+django-jalali-date==0.3.2
+djangorestframework==3.12.4
+jdatetime==3.6.2
+pytz==2021.1
+sqlparse==0.4.1
