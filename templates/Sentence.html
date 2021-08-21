@@ -163,7 +163,9 @@
 {% block exta_header %}
     <style>
         button {
-            margin: 10px;
+            margin-right: 10px;
+            margin-right: 10px;
+            margin-top: 40px;
         }
     </style>
 {% endblock %}
@@ -185,8 +187,8 @@
         $('button[type=submit]').click(function () {
             var selected_item_step = $(this).attr('step')
             var count = $('input[type=checkbox][class=' + selected_item_step + ']:checked').length
-            var text_len = $('input[type=text][class=' + selected_item_step + ']').value
-            if (count == 0 && text_len == undefined) {
+            var text_len = $('input[type=text][class=' + selected_item_step + ']').val()
+            if (count == 0 && text_len == "") {
                 alert('کاربر گرامی لطفا یک گزینه را انتخاب و یا فیلد سایر را تکمیل نمایید')
                 return false
             } else {

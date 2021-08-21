@@ -169,7 +169,8 @@ def Social(request):
             answersheet.delete()
             answersheet.responser.delete()
             request.session.flush()
-            messages.warning(request=request, message=('کابر گرامی به علت امتناع از پاسخ به سوال جنسیت و یا نبودن سن شما در محدوده مورد نظر، نظرسنجی به اتمام رسید.'))
+            messages.warning(request=request, message=(
+                'کابر گرامی به علت امتناع از پاسخ به سوال جنسیت و یا نبودن سن شما در محدوده مورد نظر، نظرسنجی به اتمام رسید.'))
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
@@ -459,26 +460,41 @@ def Sentence(request):
         return render(request, '../templates/Sentence.html', context=context)
     else:
         options = get_object_or_404(Question, code='A1').options
-        Save_Sentence(A13_1, request.POST.getlist('A13_1'), answersheet, options)
-        Save_Sentence(A13_1, request.POST.getlist('A13_1_other'), answersheet, options)
 
-        Save_Sentence(A13_2, request.POST.getlist('A13_2'), answersheet, options)
-        Save_Sentence(A13_2, request.POST.getlist('A13_2_other'), answersheet, options)
+        if len(request.POST.getlist('A13_1')) > 0:
+            Save_Sentence(A13_1, request.POST.getlist('A13_1'), answersheet, options)
+        if request.POST.getlist('A13_1_other')[0] != '':
+            Save_Sentence(A13_1, request.POST.getlist('A13_1_other'), answersheet, options)
 
-        Save_Sentence(A13_3, request.POST.getlist('A13_3'), answersheet, options)
-        Save_Sentence(A13_3, request.POST.getlist('A13_3_other'), answersheet, options)
+        if len(request.POST.getlist('A13_2')) > 0:
+            Save_Sentence(A13_2, request.POST.getlist('A13_2'), answersheet, options)
+        if request.POST.getlist('A13_2_other')[0] != '':
+            Save_Sentence(A13_2, request.POST.getlist('A13_2_other'), answersheet, options)
 
-        Save_Sentence(A13_4, request.POST.getlist('A13_4'), answersheet, options)
-        Save_Sentence(A13_4, request.POST.getlist('A13_4_other'), answersheet, options)
+        if len(request.POST.getlist('A13_3')) > 0:
+            Save_Sentence(A13_3, request.POST.getlist('A13_3'), answersheet, options)
+        if request.POST.getlist('A13_3_other')[0] != '':
+            Save_Sentence(A13_3, request.POST.getlist('A13_3_other'), answersheet, options)
 
-        Save_Sentence(A13_5, request.POST.getlist('A13_5'), answersheet, options)
-        Save_Sentence(A13_5, request.POST.getlist('A13_5_other'), answersheet, options)
+        if len(request.POST.getlist('A13_4')) > 0:
+            Save_Sentence(A13_4, request.POST.getlist('A13_4'), answersheet, options)
+        if request.POST.getlist('A13_4_other')[0] != '':
+            Save_Sentence(A13_4, request.POST.getlist('A13_4_other'), answersheet, options)
 
-        Save_Sentence(A13_6, request.POST.getlist('A13_6'), answersheet, options)
-        Save_Sentence(A13_6, request.POST.getlist('A13_6_other'), answersheet, options)
+        if len(request.POST.getlist('A13_5')) > 0:
+            Save_Sentence(A13_5, request.POST.getlist('A13_5'), answersheet, options)
+        if request.POST.getlist('A13_5_other')[0] != '':
+            Save_Sentence(A13_5, request.POST.getlist('A13_5_other'), answersheet, options)
 
-        Save_Sentence(A13_7, request.POST.getlist('A13_7'), answersheet, options)
-        Save_Sentence(A13_7, request.POST.getlist('A13_7_other'), answersheet, options)
+        if len(request.POST.getlist('A13_6')) > 0:
+            Save_Sentence(A13_6, request.POST.getlist('A13_6'), answersheet, options)
+        if request.POST.getlist('A13_6_other')[0] != '':
+            Save_Sentence(A13_6, request.POST.getlist('A13_6_other'), answersheet, options)
+
+        if len(request.POST.getlist('A13_7')) > 0:
+            Save_Sentence(A13_7, request.POST.getlist('A13_7'), answersheet, options)
+        if request.POST.getlist('A13_7_other')[0] != '':
+            Save_Sentence(A13_7, request.POST.getlist('A13_7_other'), answersheet, options)
 
         survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
         messages.success(request=request, message='تشکر از شرکت در نظرسنجی پرسشنامه با موفقیت ثبت شد')
