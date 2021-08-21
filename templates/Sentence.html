@@ -20,6 +20,8 @@
             </h5>
             <div id="option">
                 {{ form.A13_1 }}
+                {{ form.A13_1_other.label }}
+                {{ form.A13_1_other }}
                 <div class="clearfix">
                     <button type="button" step="1" name="{{ A13_1.code }}" disabled value="previous"
                             class="float-right btn btn-primary">
@@ -32,13 +34,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 2 ">
+        <div class="question 2 ">
             <h5>
                 {{ A13_2.code }}
                 {{ A13_2.title }}
             </h5>
             <div id="option">
                 {{ form.A13_2 }}
+                {{ form.A13_2_other.label }}
+                {{ form.A13_2_other }}
                 <div class="clearfix">
                     <button type="button" step="2" name="{{ A13_2.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -51,13 +55,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 3 ">
+        <div class="question 3 ">
             <h5>
                 {{ A13_3.code }}
                 {{ A13_3.title }}
             </h5>
             <div id="option">
                 {{ form.A13_3 }}
+                {{ form.A13_3_other.label }}
+                {{ form.A13_3_other }}
                 <div class="clearfix">
                     <button type="button" step="3" name="{{ A13_3.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -70,13 +76,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 4 ">
+        <div class="question 4 ">
             <h5>
                 {{ A13_4.code }}
                 {{ A13_4.title }}
             </h5>
             <div id="option">
                 {{ form.A13_4 }}
+                {{ form.A13_4_other.label }}
+                {{ form.A13_4_other }}
                 <div class="clearfix">
                     <button type="button" step="4" name="{{ A13_4.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -89,13 +97,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 5 ">
+        <div class="question 5 ">
             <h5>
                 {{ A13_5.code }}
                 {{ A13_5.title }}
             </h5>
             <div id="option">
                 {{ form.A13_5 }}
+                {{ form.A13_5_other.label }}
+                {{ form.A13_5_other }}
                 <div class="clearfix">
                     <button type="button" step="5" name="{{ A13_5.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -108,13 +118,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 6 ">
+        <div class="question 6 ">
             <h5>
                 {{ A13_6.code }}
                 {{ A13_6.title }}
             </h5>
             <div id="option">
                 {{ form.A13_6 }}
+                {{ form.A13_6_other.label }}
+                {{ form.A13_6_other }}
                 <div class="clearfix">
                     <button type="button" step="6" name="{{ A13_6.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -127,13 +139,15 @@
                 </div>
             </div>
         </div>
-        <div class="question hide 7 ">
+        <div class="question 7 ">
             <h5>
                 {{ A13_7.code }}
                 {{ A13_7.title }}
             </h5>
             <div id="option">
                 {{ form.A13_7 }}
+                {{ form.A13_7_other.label }}
+                {{ form.A13_7_other }}
                 <div class="clearfix">
                     <button type="button" step="7" name="{{ A13_7.code }}" value="previous"
                             class="float-right btn btn-primary">
@@ -156,19 +170,13 @@
 {% block js %}
     <script>
         $('button').addClass('col-lg-5 col-md-5 col-sm-5 col-5')
-        $('input[type=checkbox]').click(function () {
-            var selected_item_class = $(this).attr('class')
-            if (parseInt(this.value) === 99) {
-                $('input[type=checkbox][value!=99][class=' + selected_item_class + ']:checked').prop('checked', false)
-            } else {
-                $('input[type=checkbox][value=99][class=' + selected_item_class + ']:checked').prop('checked', false)
-            }
-        });
         $('button[type=button][value=next]').click(function () {
             var selected_item_step = $(this).attr('step')
             var count = $('input[type=checkbox][class=' + selected_item_step + ']:checked').length
-            if (count == 0) {
-                alert('لطفا یک گزینه را انتخاب کنید')
+            var text_len = $('input[type=text][class=' + selected_item_step + ']').val()
+            console.log(text_len)
+            if (count == 0 && text_len == "") {
+                alert('کاربر گرامی لطفا یک گزینه را انتخاب و یا فیلد سایر را تکمیل نمایید')
             } else {
                 $('div.' + selected_item_step + '').addClass('hide')
                 $('div.' + ++selected_item_step + '').removeClass('hide')
@@ -177,8 +185,9 @@
         $('button[type=submit]').click(function () {
             var selected_item_step = $(this).attr('step')
             var count = $('input[type=checkbox][class=' + selected_item_step + ']:checked').length
-            if (count == 0) {
-                alert('لطفا یک گزینه را انتخاب کنید')
+            var text_len = $('input[type=text][class=' + selected_item_step + ']').value
+            if (count == 0 && text_len == undefined) {
+                alert('کاربر گرامی لطفا یک گزینه را انتخاب و یا فیلد سایر را تکمیل نمایید')
                 return false
             } else {
                 return true
@@ -189,15 +198,13 @@
             $('div.' + selected_item_step + '').addClass('hide')
             $('div.' + --selected_item_step + '').removeClass('hide')
         });
-        $('form').submit(function (){
-           var agree=confirm('پس از تایید پرسشنامه ویرایش آن امکان پذیر نیست')
-            if (agree ==true)
-            {
-                $('button[type=button][name=A13-7]').attr('disabled',true)
-                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled',true)
+        $('form').submit(function () {
+            var agree = confirm('پس از تایید پرسشنامه ویرایش آن امکان پذیر نیست')
+            if (agree == true) {
+                $('button[type=button][name=A13-7]').attr('disabled', true)
+                $('button[type=submit]').html('<span class="spinner-border spinner-border-sm"></span>').attr('disabled', true)
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         });

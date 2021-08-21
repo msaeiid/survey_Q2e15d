@@ -173,27 +173,53 @@ class Sentence_from(forms.Form):
         sentence_choices = []
         for item in answers_to_A6:
             sentence_choices.append((item.option.value, item.option.title))
-        sentence_choices.append((99, 'هیچکدام'), )
         sentence_choices = tuple(sentence_choices)
+        # A13_1
         self.fields['A13_1'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_1_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_2
         self.fields['A13_2'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_2_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_3
         self.fields['A13_3'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_3_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_4
         self.fields['A13_4'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_4_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_5
         self.fields['A13_5'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_5_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_6
         self.fields['A13_6'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
+        self.fields['A13_6_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
+        # A13_7
         self.fields['A13_7'] = forms.MultipleChoiceField(label='', choices=sentence_choices,
                                                          widget=forms.CheckboxSelectMultiple, required=False)
-        self.fields['A13_1'].widget.attrs['class'] = 1
-        self.fields['A13_2'].widget.attrs['class'] = 2
-        self.fields['A13_3'].widget.attrs['class'] = 3
-        self.fields['A13_4'].widget.attrs['class'] = 4
-        self.fields['A13_5'].widget.attrs['class'] = 5
-        self.fields['A13_6'].widget.attrs['class'] = 6
-        self.fields['A13_7'].widget.attrs['class'] = 7
+        self.fields['A13_7_other'] = forms.CharField(label='سایر', max_length=20, min_length=1, required=False)
 
+        self.fields['A13_1'].widget.attrs['class'] = 1
+        self.fields['A13_1_other'].widget.attrs['class'] = 1
+
+        self.fields['A13_2'].widget.attrs['class'] = 2
+        self.fields['A13_2_other'].widget.attrs['class'] = 2
+
+        self.fields['A13_3'].widget.attrs['class'] = 3
+        self.fields['A13_3_other'].widget.attrs['class'] = 3
+
+        self.fields['A13_4'].widget.attrs['class'] = 4
+        self.fields['A13_4_other'].widget.attrs['class'] = 4
+
+        self.fields['A13_5'].widget.attrs['class'] = 5
+        self.fields['A13_5_other'].widget.attrs['class'] = 5
+
+        self.fields['A13_6'].widget.attrs['class'] = 6
+        self.fields['A13_6_other'].widget.attrs['class'] = 6
+
+        self.fields['A13_7'].widget.attrs['class'] = 7
+        self.fields['A13_7_other'].widget.attrs['class'] = 7

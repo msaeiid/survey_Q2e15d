@@ -460,12 +460,26 @@ def Sentence(request):
     else:
         options = get_object_or_404(Question, code='A1').options
         Save_Sentence(A13_1, request.POST.getlist('A13_1'), answersheet, options)
+        Save_Sentence(A13_1, request.POST.getlist('A13_1_other'), answersheet, options)
+
         Save_Sentence(A13_2, request.POST.getlist('A13_2'), answersheet, options)
+        Save_Sentence(A13_2, request.POST.getlist('A13_2_other'), answersheet, options)
+
         Save_Sentence(A13_3, request.POST.getlist('A13_3'), answersheet, options)
+        Save_Sentence(A13_3, request.POST.getlist('A13_3_other'), answersheet, options)
+
         Save_Sentence(A13_4, request.POST.getlist('A13_4'), answersheet, options)
+        Save_Sentence(A13_4, request.POST.getlist('A13_4_other'), answersheet, options)
+
         Save_Sentence(A13_5, request.POST.getlist('A13_5'), answersheet, options)
+        Save_Sentence(A13_5, request.POST.getlist('A13_5_other'), answersheet, options)
+
         Save_Sentence(A13_6, request.POST.getlist('A13_6'), answersheet, options)
+        Save_Sentence(A13_6, request.POST.getlist('A13_6_other'), answersheet, options)
+
         Save_Sentence(A13_7, request.POST.getlist('A13_7'), answersheet, options)
+        Save_Sentence(A13_7, request.POST.getlist('A13_7_other'), answersheet, options)
+
         survey = get_object_or_404(Survey, title='پلتفرم‌های آنلاین')
         messages.success(request=request, message='تشکر از شرکت در نظرسنجی پرسشنامه با موفقیت ثبت شد')
         request.session.flush()
