@@ -174,7 +174,7 @@ def Social(request):
             return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
         if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
             limit = Limit.objects.get(marital_status=marital_status, age=age_category)
-            if not answersheet.answers.filter(question__code='Q2').exists():
+            if not answersheet.answers.filter(question__code=Q2.code).exists():
                 if not limit.check_for_capacity():
                     answersheet.delete()
                     answersheet.responser.delete()
@@ -187,6 +187,23 @@ def Social(request):
         if answersheet.answers.filter(question__code=Q2.code).exists():
             answer = answersheet.answers.get(question__code=Q2.code)
             if answer.option != Q2.options.get(value=age_category):
+                ### return limit capacity
+                if Limit.objects.filter(marital_status=marital_status, age=answer.option.value).exists():
+                    limit = Limit.objects.get(marital_status=marital_status, age=answer.option.value)
+                    limit.capacity -= 1
+                    limit.save()
+                ### return limit capacity
+                ### check for limit change
+                if Limit.objects.filter(marital_status=marital_status, age=age_category).exists():
+                    limit = Limit.objects.get(marital_status=marital_status, age=age_category)
+                    if not limit.check_for_capacity():
+                        answersheet.delete()
+                        answersheet.responser.delete()
+                        request.session.flush()
+                        messages.warning(request=request,
+                                         message=('به علت اتمام ظرفیت گروه سنی نظرسنجی به اتمام رسید.'))
+                        return redirect(reverse('agah:survey', args=[answersheet.survey.pk]))
+                ### check for change in age
                 answer.option = Q2.options.get(value=age_category)
                 answer.point = Q2.options.get(value=age_category).point
                 answer.save()
