@@ -54,8 +54,6 @@ class AnswerCustom(admin.ModelAdmin):
         else:
             return queryset, False
 
-    empty_value_display = 'خالی'
-
 
 class RegionCustom(admin.ModelAdmin):
     list_display = ('city', 'question', 'title', 'value', 'point',)

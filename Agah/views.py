@@ -184,75 +184,86 @@ def Social(request):
 
         # Q2 save answer...
         answer = None
-        if Answer.objects.filter(question=Q2, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=Q2, answersheet=answersheet)
-            answer.option = Q2.options.get(value=age_category)
-            answer.point = Q2.options.get(value=age_category).point
+        if answersheet.answers.filter(question__code=Q2.code).exists():
+            answer = answersheet.answers.get(question__code=Q2.code)
+            if answer.option != Q2.options.get(value=age_category):
+                answer.option = Q2.options.get(value=age_category)
+                answer.point = Q2.options.get(value=age_category).point
+                answer.save()
         else:
             answer = Answer(question=Q2, answersheet=answersheet,
                             point=Q2.options.get(value=age_category).point,
                             option=Q2.options.get(value=age_category))
-        answer.save()
+            answer.save()
 
         # Q3 save answer...
-        if Answer.objects.filter(question=Q3, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=Q3, answersheet=answersheet)
+        if answersheet.answers.filter(question__code=Q3.code).exists():
+            answer = answersheet.answers.get(question__code=Q3.code)
             if answer.answer != marital_status:
                 Child.objects.filter(responder=answersheet.responser).delete()
-            answer.option = Q3.options.get(value=marital_status)
-            answer.point = Q3.options.get(value=marital_status).point
+            if answer.option != Q3.options.get(value=marital_status):
+                answer.option = Q3.options.get(value=marital_status)
+                answer.point = Q3.options.get(value=marital_status).point
+                answer.save()
         else:
             answer = Answer(question=Q3, answersheet=answersheet, option=Q3.options.get(value=marital_status),
                             point=Q3.options.get(value=marital_status).point)
-        answer.save()
+            answer.save()
 
         # Q4 save answer...
         number_of_child = request.POST.get('number_of_child', 0)
         if number_of_child == '':
             number_of_child = 0
-        if Answer.objects.filter(question=Q4, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=Q4, answersheet=answersheet)
-            Child.objects.filter(responder=answersheet.responser).delete()
-            answer.answer = int(number_of_child)
-            answer.point = 0
+        if answersheet.answers.filter(question__code=Q4.code).exists():
+            answer = answersheet.answers.get(question__code=Q4.code)
+            if int(answer.answer) != int(number_of_child):
+                Child.objects.filter(responder=answersheet.responser).delete()
+                answer.answer = int(number_of_child)
+                answer.point = 0
+                answer.save()
         else:
             answer = Answer(question=Q4, answersheet=answersheet, answer=int(number_of_child), point=0)
-        answer.save()
+            answer.save()
 
         # T1 save answer...
         home = request.POST.get('home')
-        if Answer.objects.filter(question=T1, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=T1, answersheet=answersheet)
-            answer.option = T1.options.get(value=home)
-            answer.point = T1.options.get(value=home).point
+        if answersheet.answers.filter(question__code=T1.code).exists():
+            answer = answersheet.answers.get(question__code=T1.code)
+            if answer.option != T1.options.get(value=home):
+                answer.option = T1.options.get(value=home)
+                answer.point = T1.options.get(value=home).point
+                answer.save()
         else:
             answer = Answer(question=T1, answersheet=answersheet, option=T1.options.get(value=home),
                             point=T1.options.get(value=home).point)
-        answer.save()
+            answer.save()
 
         # T2 save answer...
         job = request.POST.get('job')
-        if Answer.objects.filter(question=T2, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=T2, answersheet=answersheet)
-            answer.answer = job
-            answer.option = T2.options.get(value=job)
-            answer.point = T2.options.get(value=job).point
+        if answersheet.answers.filter(question__code=T2.code).exists():
+            answer = answersheet.answers.get(question__code=T2.code)
+            if answer.option != T2.options.get(value=job):
+                answer.option = T2.options.get(value=job)
+                answer.point = T2.options.get(value=job).point
+                answer.save()
         else:
             answer = Answer(question=T2, answersheet=answersheet, option=T2.options.get(value=job),
                             point=T2.options.get(value=job).point)
-        answer.save()
+            answer.save()
 
         # T3 save answer...
         region = request.POST.get('region')
-        if Answer.objects.filter(question=T3, answersheet=answersheet).exists():
-            answer = Answer.objects.get(question=T3, answersheet=answersheet)
-            answer.answer = region
-            answer.point = T3.regions.get(value=region, city=answersheet.responser.city).point
+        if answersheet.answers.filter(question__code=T3.code).exists():
+            answer = answersheet.answers.get(question__code=T3.code)
+            if int(answer.answer) != int(region):
+                answer.answer = region
+                answer.point = T3.regions.get(value=region, city=answersheet.responser.city).point
+                answer.save()
         else:
             answer = Answer(question=T3, answersheet=answersheet,
                             answer=region,
                             point=T3.regions.get(value=region, city=answersheet.responser.city).point)
-        answer.save()
+            answer.save()
 
         # T4_1 save answer...
         if int(number_of_child) > 0:
