@@ -354,6 +354,7 @@
             }
         });
         $(document).ready(function () {
+            $('select[name=marital_status]').val('')
             var m = moment();
             m.locale('fa');
             var hour = parseInt(m.format('HH'))

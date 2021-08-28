@@ -188,8 +188,8 @@ def Social(request):
             answer = answersheet.answers.get(question__code=Q2.code)
             if answer.option != Q2.options.get(value=age_category):
                 ### return limit capacity
-                if Limit.objects.filter(marital_status=marital_status, age=answer.option.value).exists():
-                    limit = Limit.objects.get(marital_status=marital_status, age=answer.option.value)
+                if Limit.objects.filter(marital_status=answersheet.answers.get(question__code=Q3.code).option.value, age=answer.option.value).exists():
+                    limit = Limit.objects.get(marital_status=answersheet.answers.get(question__code=Q3.code).option.value, age=answer.option.value)
                     limit.capacity -= 1
                     limit.save()
                 ### return limit capacity
