@@ -1,4 +1,3 @@
-```markdown
 # Agah Company Survey
 
 This project is a web-based survey application developed for Agah Company, an Iranian company, aimed at collecting valuable feedback from users. The application utilizes modern web technologies, ensuring a responsive and user-friendly experience.
@@ -66,13 +65,8 @@ Participants can access the survey via the provided URL and fill out the forms. 
 
 Contributions are welcome! If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 - Thanks to the Agah Company for the opportunity to develop this survey application.
 - Thanks to the open-source community for providing valuable tools and resources.
-
-```
